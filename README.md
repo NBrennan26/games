@@ -1,1 +1,1 @@
-All the games in one place
+All the games in one convenient location
