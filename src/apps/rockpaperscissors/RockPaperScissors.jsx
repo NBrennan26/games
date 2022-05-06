@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
+import "./rps.css"
 
 function RockPaperScissors() {
   const [playerRounds, setPlayerRounds] = useState(0);
@@ -121,7 +122,7 @@ function RockPaperScissors() {
   };
 
   return (
-    <>
+    <div className="game-main">
       <div className="game-title-cont">
         <span className="game-title">Rock Paper Scissors</span>
       </div>
@@ -132,9 +133,9 @@ function RockPaperScissors() {
             <div>Computer Score: {aiScore}</div>
           </div>
           <div className="game-controls">
-            <button onClick={selectRock}>Rock</button>
-            <button onClick={selectPaper}>Paper</button>
-            <button onClick={selectScissors}>Scissors</button>
+            <button className="rock-btn" onClick={selectRock}>Rock</button>
+            <button className="paper-btn" onClick={selectPaper}>Paper</button>
+            <button className="scissors-btn" onClick={selectScissors}>Scissors</button>
           </div>
           <div className="game-scripts">
             {aiRounds > 0 && (
@@ -147,12 +148,14 @@ function RockPaperScissors() {
           </div>
         </div>
       ) : (
-        <>
-          <div>{gameWinner} Won!</div>
-          <button onClick={resetGame}>Play Again? </button>
-        </>
+        <div className="game-board">
+          <div className="game-outcome">{gameWinner} Won!</div>
+          <button className="game-reset-btn" onClick={resetGame}>
+            Play Again?
+          </button>
+        </div>
       )}
-    </>
+    </div>
   );
 }
 
