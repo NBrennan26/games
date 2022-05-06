@@ -1,27 +1,40 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 
 function RockPaperScissors() {
+  const [playerRounds, setPlayerRounds] = useState(0);
+  const [aiRounds, setAiRounds] = useState(0);
   const [playerScore, setPlayerScore] = useState(0);
   const [aiScore, setAiScore] = useState(0);
   const [playerSelect, setPlayerSelect] = useState("");
   const [aiSelect, setAiSelect] = useState("");
   const [roundResult, setRoundResult] = useState("");
   const [gameResult, setGameResult] = useState("");
-  const [gameMessage, setGameMessage] = useState("");
-  const [roundCount, setRoundCount] = useState(0);
+  const [gameWinner, setGameWinner] = useState("");
+  const [gameOver, setGameOver] = useState(false);
+  const [playerMessage, setPlayerMessage] = useState("")
+  const [aiMessage, setAiMessage] = useState("")
+  const [gameMessage, setGameMessage] = useState("")
+
 
   const selectRock = () => {
     setPlayerSelect("rock");
-    setRoundCount(roundCount + 1);
+    setPlayerRounds(playerRounds + 1);
+    aiTurn();
   };
   const selectPaper = () => {
     setPlayerSelect("paper");
+    setPlayerRounds(playerRounds + 1);
+    aiTurn();
   };
   const selectScissors = () => {
     setPlayerSelect("scissors");
+    setPlayerRounds(playerRounds + 1);
+    aiTurn();
   };
 
   const aiTurn = () => {
+    setAiRounds(aiRounds + 1);
     let num = Math.random();
     num <= 0.3333
       ? setAiSelect("rock")
@@ -59,54 +72,50 @@ function RockPaperScissors() {
     } else if (roundResult === "ai") {
       setAiScore(aiScore + 1);
       checkForWin();
-    } else if (roundCount > 1) {
-      setGameMessage(`Both Players Chose ${playerSelect}. Try Again`);
-    } else {
-      setGameMessage("Select Your First Throw");
     }
   };
 
   const checkForWin = () => {
     if (playerScore === 3) {
       setGameResult("player");
-      resetGame();
+      setGameWinner("Player");
+      setGameOver(true);
     } else if (aiScore === 3) {
       setGameResult("ai");
-      resetGame();
+      setGameWinner("Computer");
+      setGameOver(true);
+    } else {
+      setRoundResult("");
     }
   };
 
   useEffect(() => {
-    aiTurn();
-    setGameMessage(`Player Chooses ${playerSelect}`);
-  }, [playerSelect]);
-
-  useEffect(() => {
+    console.log(playerSelect);
+    console.log(aiSelect);
     checkRound();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [aiSelect]);
+  }, [aiRounds]);
 
   useEffect(() => {
     updateStanding();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roundResult]);
 
   useEffect(() => {
     checkForWin();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playerScore, aiScore]);
 
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [gameResult]);
+  useEffect(() => {}, [gameResult]);
 
   const resetGame = () => {
+    setPlayerRounds(0);
+    setPlayerSelect("");
+    setAiRounds(0);
+    setAiSelect("");
     setPlayerScore(0);
     setAiScore(0);
-    setRoundCount(0)
-    setPlayerSelect("");
-    setAiSelect("");
+    setRoundResult("");
+    setGameResult("");
+    setGameWinner("");
+    setGameOver(false);
   };
 
   return (
@@ -114,21 +123,53 @@ function RockPaperScissors() {
       <div className="game-title-cont">
         <span className="game-title">Rock Paper Scissors</span>
       </div>
-      <div className="game-board">
-        <div className="scorebaord">
-          <div>Player Score: {playerScore}</div>
-          <div>Computer Score: {aiScore}</div>
+      {!gameOver ? (
+        <div className="game-board">
+          <div className="scorebaord">
+            <div>Player Score: {playerScore}</div>
+            <div>Computer Score: {aiScore}</div>
+          </div>
+          <div className="game-controls">
+            <button onClick={selectRock}>Rock</button>
+            <button onClick={selectPaper}>Paper</button>
+            <button onClick={selectScissors}>Scissors</button>
+          </div>
+          <div className="game-scripts">
+            
+            
+            <div>Player: {playerMessage}</div>
+            <div>Ai: {aiMessage}</div>
+            <div>Game Message: {gameMessage}</div>
+            <div>Round Result: {roundResult}</div>
+          </div>
         </div>
-        <div className="game-controls">
-          <button onClick={selectRock}>Rock</button>
-          <button onClick={selectPaper}>Paper</button>
-          <button onClick={selectScissors}>Scissors</button>
-        </div>
-        <div className="game-scripts">
-          <div>{gameMessage}</div>
-          <div>{gameResult}</div>
-        </div>
+      ) : (
+        <>
+          <div>{gameWinner} Won!</div>
+          <button onClick={resetGame}>Play Again? </button>
+        </>
+      )}
+
+      <br />
+      <br />
+      <br />
+      <div>
+        <span>Current Values: </span>
+        <div>Player Rounds: {playerRounds}</div>
+        <div>AI Rounds: {aiRounds}</div>
+        <div>Player Score: {playerScore}</div>
+        <div>AI Score: {aiScore}</div>
+        <div>Player Select: {playerSelect}</div>
+        <div>AI Select: {aiSelect}</div>
+        <div>Round Result: {roundResult}</div>
+        <div>Game Result: {gameResult}</div>
+        <div>Game Winner: {gameWinner}</div>
+        <div>Game Over: {gameOver}</div>
+        <div>Game Message: {gameMessage}</div>
       </div>
+      <br />
+      <br />
+      <br />
     </>
   );
 }
