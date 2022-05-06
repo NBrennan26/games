@@ -7,8 +7,8 @@ function MenuToggle() {
   const [open, setOpen] = useState(false);
 
   const handleToggle = () => {
-    setOpen(!open)
-  }
+    setOpen(!open);
+  };
 
   return (
     <>
