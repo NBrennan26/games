@@ -1,0 +1,60 @@
+:root {
+  --header-color: #8f96a3;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+/**********/
+/* Header */
+/**********/
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  background: var(--header-color);
+}
+.menu-toggle-cont {
+  margin-left: 20px;
+}
+.header-title-cont {
+  margin-right: 20px;
+}
+.drop-menu {
+  position: absolute;
+  top: 70px;
+  left: 0;
+  background: var(--header-color);
+  width: 40%;
+  max-width: 240px;
+  height: calc(100vh - 70px);
+}
+.nav-list {
+  display: flex;
+  flex-direction: column;
+}
+.nav-list li {
+  margin: 5% 0;
+  margin-left: 10px;
+}
+
+/**********/
+/* Footer */
+/**********/
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.github-icon {
+  height: 3vh;
+  min-height: 15px;
+  margin-right: 1vh;
+}
+.github-icon:hover {
+  transform: scale(1.5);
+}
