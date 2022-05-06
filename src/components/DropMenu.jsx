@@ -5,7 +5,7 @@ function DropMenu(props) {
     <>
       {props.open && (
         <div className="drop-menu">
-          <NavLinks />
+          <NavLinks handleToggle={props.handleToggle}/>
         </div>
       )}
     </>
