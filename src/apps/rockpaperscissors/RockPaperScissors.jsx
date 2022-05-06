@@ -12,10 +12,9 @@ function RockPaperScissors() {
   const [gameResult, setGameResult] = useState("");
   const [gameWinner, setGameWinner] = useState("");
   const [gameOver, setGameOver] = useState(false);
-  const [playerMessage, setPlayerMessage] = useState("")
-  const [aiMessage, setAiMessage] = useState("")
-  const [gameMessage, setGameMessage] = useState("")
-
+  const [playerMessage, setPlayerMessage] = useState("");
+  const [aiMessage, setAiMessage] = useState("");
+  const [gameMessage, setGameMessage] = useState("");
 
   const selectRock = () => {
     setPlayerSelect("rock");
@@ -50,18 +49,21 @@ function RockPaperScissors() {
       (playerSelect === "paper" && aiSelect === "rock")
     ) {
       setRoundResult("player");
+      setGameMessage("Player Wins this Round");
     } else if (
       (playerSelect === "rock" && aiSelect === "paper") ||
       (playerSelect === "paper" && aiSelect === "scissors") ||
       (playerSelect === "scissors" && aiSelect === "rock")
     ) {
       setRoundResult("ai");
+      setGameMessage("Computer Wins this Round");
     } else if (
       (playerSelect === "rock" && aiSelect === "rock") ||
       (playerSelect === "paper" && aiSelect === "paper") ||
       (playerSelect === "scissors" && aiSelect === "scissors")
     ) {
       setRoundResult("tie");
+      setGameMessage("This Round is a Tie");
     }
   };
 
@@ -90,8 +92,8 @@ function RockPaperScissors() {
   };
 
   useEffect(() => {
-    console.log(playerSelect);
-    console.log(aiSelect);
+    setPlayerMessage(`Player throws ${playerSelect}`);
+    setAiMessage(`Computer throws ${aiSelect}`);
     checkRound();
   }, [aiRounds]);
 
@@ -135,12 +137,13 @@ function RockPaperScissors() {
             <button onClick={selectScissors}>Scissors</button>
           </div>
           <div className="game-scripts">
-            
-            
-            <div>Player: {playerMessage}</div>
-            <div>Ai: {aiMessage}</div>
-            <div>Game Message: {gameMessage}</div>
-            <div>Round Result: {roundResult}</div>
+            {aiRounds > 0 && (
+              <div>
+                <div>{playerMessage}</div>
+                <div>{aiMessage}</div>
+                <div>{gameMessage}</div>
+              </div>
+            )}
           </div>
         </div>
       ) : (
@@ -149,27 +152,6 @@ function RockPaperScissors() {
           <button onClick={resetGame}>Play Again? </button>
         </>
       )}
-
-      <br />
-      <br />
-      <br />
-      <div>
-        <span>Current Values: </span>
-        <div>Player Rounds: {playerRounds}</div>
-        <div>AI Rounds: {aiRounds}</div>
-        <div>Player Score: {playerScore}</div>
-        <div>AI Score: {aiScore}</div>
-        <div>Player Select: {playerSelect}</div>
-        <div>AI Select: {aiSelect}</div>
-        <div>Round Result: {roundResult}</div>
-        <div>Game Result: {gameResult}</div>
-        <div>Game Winner: {gameWinner}</div>
-        <div>Game Over: {gameOver}</div>
-        <div>Game Message: {gameMessage}</div>
-      </div>
-      <br />
-      <br />
-      <br />
     </>
   );
 }
