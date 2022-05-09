@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import "./ttt.css";
+import GameSquare from "./GameSquare";
 
 function TicTacToe() {
   const [playerTurn, setPlayerTurn] = useState("player1");
@@ -14,29 +15,29 @@ function TicTacToe() {
     human: false,
   });
   const [selectedSquare, setSelectedSquare] = useState("");
-  const [gameBoard, setGameBoard] = useState({
-    square0: null,
-    square1: null,
-    square2: null,
-    square3: null,
-    square4: null,
-    square5: null,
-    square6: null,
-    square7: null,
-    square8: null,
-  });
+  const [gameBoard, setGameBoard] = useState([
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+  ]);
 
   const claimSquare = (e) => {
-    let tgtSquare = "square" + e.target.classList[1].slice(7);
+    console.log(e.target);
+    let tgtSquare = parseInt(e.target.classList[1].slice(7));
     setSelectedSquare(tgtSquare);
   };
 
   useEffect(() => {
     if (selectedSquare !== "" && gameBoard[selectedSquare] == null) {
-      setGameBoard({
-        ...gameBoard,
-        [selectedSquare]: playerTurn,
-      });
+      let updatedBoard = [...gameBoard]
+      updatedBoard[selectedSquare] = playerTurn
+      setGameBoard(updatedBoard);
       stateCheck();
     }
   }, [selectedSquare]);
@@ -81,23 +82,60 @@ function TicTacToe() {
             : "ttt-board-cont p2-board"
         }
       >
-        <div
-          className={
-            gameBoard.square0 === "player2"
-              ? "ttt-square square-0 p2-square"
-              : gameBoard.square0 === "player1"
-              ? "ttt-square square-0 p1-square"
-              : "ttt-square square-0 neutral-square"
-          }
-          onClick={claimSquare}
-        >
-          {gameBoard.square0 === "player2"
-            ? "O"
-            : gameBoard.square0 === "player1"
-            ? "X"
-            : ""}
-        </div>
-        <div
+        <GameSquare
+          claimSquare={claimSquare}
+          gameBoard={gameBoard}
+          square={0}
+        />
+        <GameSquare
+          claimSquare={claimSquare}
+          gameBoard={gameBoard}
+          square={1}
+        />
+        <GameSquare
+          claimSquare={claimSquare}
+          gameBoard={gameBoard}
+          square={2}
+        />
+        <GameSquare
+          claimSquare={claimSquare}
+          gameBoard={gameBoard}
+          square={3}
+        />
+        <GameSquare
+          claimSquare={claimSquare}
+          gameBoard={gameBoard}
+          square={4}
+        />
+        <GameSquare
+          claimSquare={claimSquare}
+          gameBoard={gameBoard}
+          square={5}
+        />
+        <GameSquare
+          claimSquare={claimSquare}
+          gameBoard={gameBoard}
+          square={6}
+        />
+        <GameSquare
+          claimSquare={claimSquare}
+          gameBoard={gameBoard}
+          square={7}
+        />
+        <GameSquare
+          claimSquare={claimSquare}
+          gameBoard={gameBoard}
+          square={8}
+        />
+      </div>
+    </>
+  );
+}
+
+export default TicTacToe;
+
+/*
+<div
           className={
             gameBoard.square1 === "player2"
               ? "ttt-square square-1 p2-square"
@@ -225,9 +263,4 @@ function TicTacToe() {
             ? "X"
             : ""}
         </div>
-      </div>
-    </>
-  );
-}
-
-export default TicTacToe;
+        */

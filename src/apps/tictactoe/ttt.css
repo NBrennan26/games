@@ -35,9 +35,9 @@
 .square-4 {
   border-style: solid;
 }
-.p1-square {
+.player1-square {
   background: red;
 }
-.p2-square {
+.player2-square {
   background: blue;
 }
