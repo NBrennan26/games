@@ -163,10 +163,10 @@ function TicTacToe() {
       </div>
       {!gameOver ? (
         <>
-          <div className="ttt-data-cont">
-            <div className="ttt-controls"></div>
-            <div className="ttt-scripts"></div>
-            <div className="scorebaord"></div>
+          <div className="ttt-turn-tracker">
+            {playerTurn === "player1"
+              ? `${player1.name}'s Turn`
+              : `${player2.name}'s Turn`}
           </div>
           <div
             className={

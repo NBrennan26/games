@@ -1,22 +1,20 @@
+.ttt-turn-tracker {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
 .ttt-board-cont {
   border: 2px solid black;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
   width: 60vh;
   height: 60vh;
   margin: auto;
 }
 .ttt-board-cont div {
-  width: 100%;
-  height: 100%;
   font-size: 300%;
 }
-/* .p1-board div:hover {
-  background: red;
-}
-.p2-board div:hover {
-  background: blue;
-} */
 .ttt-square {
   border: 2px solid var(--header-color);
   border-style: hidden;
@@ -41,7 +39,6 @@
 .player2-square {
   background: blue;
 }
-
 .ttt-game-board {
   display: flex;
   flex-direction: column;
