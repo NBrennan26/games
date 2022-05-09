@@ -138,6 +138,24 @@ function TicTacToe() {
     }
   };
 
+  // Reset Game
+  const resetGame = () => {
+    setPlayerTurn("player1");
+    setTurnCount(1);
+    setPlayer1({
+      name: "Player One",
+      human: true,
+    });
+    setPlayer2({
+      name: "Player Two",
+      human: false,
+    });
+    setSelectedSquare("");
+    setGameBoard([null, null, null, null, null, null, null, null, null]);
+    setGameOutcome({});
+    setGameOver(false);
+  };
+
   return (
     <>
       <div className="game-title-cont">
@@ -205,12 +223,12 @@ function TicTacToe() {
           </div>
         </>
       ) : (
-        <>
-          <div>Game Over</div>
-          <div>
+        <div className="ttt-game-board">
+          <div className="ttt-game-outcome">
             {gameOutcome.name ? `${gameOutcome.name} Wins` : "It's a Draw"}
           </div>
-        </>
+          <button onClick={resetGame}>Play Again?</button>
+        </div>
       )}
     </>
   );

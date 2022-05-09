@@ -41,3 +41,17 @@
 .player2-square {
   background: blue;
 }
+
+.ttt-game-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ttt-game-outcome {
+  width: 50vw;
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 250%;
+}
