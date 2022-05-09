@@ -10,7 +10,6 @@ function RockPaperScissors() {
   const [playerSelect, setPlayerSelect] = useState("");
   const [aiSelect, setAiSelect] = useState("");
   const [roundResult, setRoundResult] = useState("");
-  const [gameResult, setGameResult] = useState("");
   const [gameWinner, setGameWinner] = useState("");
   const [gameOver, setGameOver] = useState(false);
   const [playerMessage, setPlayerMessage] = useState("");
@@ -80,11 +79,9 @@ function RockPaperScissors() {
 
   const checkForWin = () => {
     if (playerScore === 3) {
-      setGameResult("player");
       setGameWinner("Player");
       setGameOver(true);
     } else if (aiScore === 3) {
-      setGameResult("ai");
       setGameWinner("Computer");
       setGameOver(true);
     } else {
@@ -114,7 +111,6 @@ function RockPaperScissors() {
     setPlayerScore(0);
     setAiScore(0);
     setRoundResult("");
-    setGameResult("");
     setGameWinner("");
     setGameOver(false);
   };
@@ -125,12 +121,12 @@ function RockPaperScissors() {
         <span className="game-title">Rock Paper Scissors</span>
       </div>
       {!gameOver ? (
-        <div className="game-board">
+        <div className="rps-board">
           <div className="scoreboard">
             <div>Player Score: {playerScore}</div>
             <div>Computer Score: {aiScore}</div>
           </div>
-          <div className="game-controls">
+          <div className="rps-controls">
             <button className="rock-btn" onClick={selectRock}>
               Rock
             </button>
@@ -141,7 +137,7 @@ function RockPaperScissors() {
               Scissors
             </button>
           </div>
-          <div className="game-scripts">
+          <div className="rps-scripts">
             {aiRounds > 0 && (
               <div>
                 <div>{playerMessage}</div>
@@ -152,9 +148,9 @@ function RockPaperScissors() {
           </div>
         </div>
       ) : (
-        <div className="game-board">
-          <div className="game-outcome">{gameWinner} Won!</div>
-          <button className="game-reset-btn" onClick={resetGame}>
+        <div className="rps-board">
+          <div className="rps-outcome">{gameWinner} Won!</div>
+          <button className="rps-reset-btn" onClick={resetGame}>
             Play Again?
           </button>
         </div>
