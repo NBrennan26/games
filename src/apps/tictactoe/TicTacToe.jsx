@@ -26,6 +26,8 @@ function TicTacToe() {
     null,
     null,
   ]);
+  const [gameOutcome, setGameOutcome] = useState({});
+  const [gameOver, setGameOver] = useState(false);
 
   // Click to claim a square
   const claimSquare = (e) => {
@@ -60,12 +62,14 @@ function TicTacToe() {
     }
   };
 
+  useEffect(() => {
+    if (gameOutcome === "player1" || gameOutcome === "player2") {
+      console.log("game was won");
+    }
+  }, [gameOutcome]);
+
   // Check for game won (three in a row) or draw
   const checkForWin = () => {
-    console.log(gameBoard[0]);
-    console.log(gameBoard[3]);
-    console.log(gameBoard[6]);
-
     if (
       (gameBoard[0] === gameBoard[3] &&
         gameBoard[3] === gameBoard[6] &&
@@ -94,6 +98,8 @@ function TicTacToe() {
     ) {
       // player one wins
       console.log("player 1 wins");
+      setGameOutcome(player1);
+      setGameOver(true);
     } else if (
       (gameBoard[0] === gameBoard[3] &&
         gameBoard[3] === gameBoard[6] &&
@@ -122,9 +128,13 @@ function TicTacToe() {
     ) {
       // player two wins
       console.log("player 2 wins");
+      setGameOutcome(player2);
+      setGameOver(true);
     } else if (turnCount === 9) {
       // Draw
       console.log("draw");
+      setGameOutcome("draw");
+      setGameOver(true);
     }
   };
 
@@ -133,64 +143,75 @@ function TicTacToe() {
       <div className="game-title-cont">
         <span className="game-title">Tic-Tac-Toe</span>
       </div>
-      <div className="ttt-data-cont">
-        <div className="ttt-controls"></div>
-        <div className="ttt-scripts"></div>
-        <div className="scorebaord"></div>
-      </div>
-      <div
-        className={
-          playerTurn === "player1"
-            ? "ttt-board-cont p1-board"
-            : "ttt-board-cont p2-board"
-        }
-      >
-        <GameSquare
-          claimSquare={claimSquare}
-          gameBoard={gameBoard}
-          square={0}
-        />
-        <GameSquare
-          claimSquare={claimSquare}
-          gameBoard={gameBoard}
-          square={1}
-        />
-        <GameSquare
-          claimSquare={claimSquare}
-          gameBoard={gameBoard}
-          square={2}
-        />
-        <GameSquare
-          claimSquare={claimSquare}
-          gameBoard={gameBoard}
-          square={3}
-        />
-        <GameSquare
-          claimSquare={claimSquare}
-          gameBoard={gameBoard}
-          square={4}
-        />
-        <GameSquare
-          claimSquare={claimSquare}
-          gameBoard={gameBoard}
-          square={5}
-        />
-        <GameSquare
-          claimSquare={claimSquare}
-          gameBoard={gameBoard}
-          square={6}
-        />
-        <GameSquare
-          claimSquare={claimSquare}
-          gameBoard={gameBoard}
-          square={7}
-        />
-        <GameSquare
-          claimSquare={claimSquare}
-          gameBoard={gameBoard}
-          square={8}
-        />
-      </div>
+      {!gameOver ? (
+        <>
+          <div className="ttt-data-cont">
+            <div className="ttt-controls"></div>
+            <div className="ttt-scripts"></div>
+            <div className="scorebaord"></div>
+          </div>
+          <div
+            className={
+              playerTurn === "player1"
+                ? "ttt-board-cont p1-board"
+                : "ttt-board-cont p2-board"
+            }
+          >
+            <GameSquare
+              claimSquare={claimSquare}
+              gameBoard={gameBoard}
+              square={0}
+            />
+            <GameSquare
+              claimSquare={claimSquare}
+              gameBoard={gameBoard}
+              square={1}
+            />
+            <GameSquare
+              claimSquare={claimSquare}
+              gameBoard={gameBoard}
+              square={2}
+            />
+            <GameSquare
+              claimSquare={claimSquare}
+              gameBoard={gameBoard}
+              square={3}
+            />
+            <GameSquare
+              claimSquare={claimSquare}
+              gameBoard={gameBoard}
+              square={4}
+            />
+            <GameSquare
+              claimSquare={claimSquare}
+              gameBoard={gameBoard}
+              square={5}
+            />
+            <GameSquare
+              claimSquare={claimSquare}
+              gameBoard={gameBoard}
+              square={6}
+            />
+            <GameSquare
+              claimSquare={claimSquare}
+              gameBoard={gameBoard}
+              square={7}
+            />
+            <GameSquare
+              claimSquare={claimSquare}
+              gameBoard={gameBoard}
+              square={8}
+            />
+          </div>
+        </>
+      ) : (
+        <>
+          <div>Game Over</div>
+          <div>
+            {gameOutcome.name ? `${gameOutcome.name} Wins` : "It's a Draw"}
+          </div>
+        </>
+      )}
     </>
   );
 }
