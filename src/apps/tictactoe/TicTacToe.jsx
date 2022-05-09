@@ -5,7 +5,7 @@ import GameSquare from "./GameSquare";
 
 function TicTacToe() {
   const [playerTurn, setPlayerTurn] = useState("player1");
-  const [turnCount, setTurnCount] = useState(0);
+  const [turnCount, setTurnCount] = useState(1);
   const [player1, setPlayer1] = useState({
     name: "Player One",
     human: true,
@@ -27,41 +27,104 @@ function TicTacToe() {
     null,
   ]);
 
+  // Click to claim a square
   const claimSquare = (e) => {
-    console.log(e.target);
     let tgtSquare = parseInt(e.target.classList[1].slice(7));
     setSelectedSquare(tgtSquare);
   };
 
+  // When selectedSquare changes, update gameBoard accordingly
   useEffect(() => {
     if (selectedSquare !== "" && gameBoard[selectedSquare] == null) {
-      let updatedBoard = [...gameBoard]
-      updatedBoard[selectedSquare] = playerTurn
+      let updatedBoard = [...gameBoard];
+      updatedBoard[selectedSquare] = playerTurn;
       setGameBoard(updatedBoard);
-      stateCheck();
     }
   }, [selectedSquare]);
 
+  // Upon gameBoard change, advanceGame
   useEffect(() => {
     if (selectedSquare !== "") {
+      checkForWin();
       advanceGame();
-      stateCheck();
     }
   }, [gameBoard]);
 
-  const stateCheck = () => {
-    console.log("Player Turn", playerTurn);
-    console.log("Turn Count", turnCount);
-    console.log("Selected Square", selectedSquare);
-    console.log("Game Board", gameBoard);
-  };
-
+  // Increase turn count, change current player
   const advanceGame = () => {
     setTurnCount(turnCount + 1);
     if (playerTurn === "player1") {
       setPlayerTurn("player2");
     } else {
       setPlayerTurn("player1");
+    }
+  };
+
+  // Check for game won (three in a row) or draw
+  const checkForWin = () => {
+    console.log(gameBoard[0]);
+    console.log(gameBoard[3]);
+    console.log(gameBoard[6]);
+
+    if (
+      (gameBoard[0] === gameBoard[3] &&
+        gameBoard[3] === gameBoard[6] &&
+        gameBoard[6] === "player1") ||
+      (gameBoard[1] === gameBoard[4] &&
+        gameBoard[4] === gameBoard[7] &&
+        gameBoard[7] === "player1") ||
+      (gameBoard[2] === gameBoard[5] &&
+        gameBoard[5] === gameBoard[8] &&
+        gameBoard[8] === "player1") ||
+      (gameBoard[0] === gameBoard[1] &&
+        gameBoard[1] === gameBoard[2] &&
+        gameBoard[2] === "player1") ||
+      (gameBoard[3] === gameBoard[4] &&
+        gameBoard[4] === gameBoard[5] &&
+        gameBoard[5] === "player1") ||
+      (gameBoard[6] === gameBoard[7] &&
+        gameBoard[7] === gameBoard[8] &&
+        gameBoard[8] === "player1") ||
+      (gameBoard[0] === gameBoard[4] &&
+        gameBoard[4] === gameBoard[8] &&
+        gameBoard[8] === "player1") ||
+      (gameBoard[2] === gameBoard[4] &&
+        gameBoard[4] === gameBoard[6] &&
+        gameBoard[6] === "player1")
+    ) {
+      // player one wins
+      console.log("player 1 wins");
+    } else if (
+      (gameBoard[0] === gameBoard[3] &&
+        gameBoard[3] === gameBoard[6] &&
+        gameBoard[6] === "player2") ||
+      (gameBoard[1] === gameBoard[4] &&
+        gameBoard[4] === gameBoard[7] &&
+        gameBoard[7] === "player2") ||
+      (gameBoard[2] === gameBoard[5] &&
+        gameBoard[5] === gameBoard[8] &&
+        gameBoard[8] === "player2") ||
+      (gameBoard[0] === gameBoard[1] &&
+        gameBoard[1] === gameBoard[2] &&
+        gameBoard[2] === "player2") ||
+      (gameBoard[3] === gameBoard[4] &&
+        gameBoard[4] === gameBoard[5] &&
+        gameBoard[5] === "player2") ||
+      (gameBoard[6] === gameBoard[7] &&
+        gameBoard[7] === gameBoard[8] &&
+        gameBoard[8] === "player2") ||
+      (gameBoard[0] === gameBoard[4] &&
+        gameBoard[4] === gameBoard[8] &&
+        gameBoard[8] === "player2") ||
+      (gameBoard[2] === gameBoard[4] &&
+        gameBoard[4] === gameBoard[6] &&
+        gameBoard[6] === "player2")
+    ) {
+      // player two wins
+      console.log("player 2 wins");
+    } else if (turnCount === 9) {
+      // Draw
+      console.log("draw");
     }
   };
 
@@ -133,134 +196,3 @@ function TicTacToe() {
 }
 
 export default TicTacToe;
-
-/*
-<div
-          className={
-            gameBoard.square1 === "player2"
-              ? "ttt-square square-1 p2-square"
-              : gameBoard.square1 === "player1"
-              ? "ttt-square square-1 p1-square"
-              : "ttt-square square-1 neutral-square"
-          }
-          onClick={claimSquare}
-        >
-          {gameBoard.square1 === "player2"
-            ? "O"
-            : gameBoard.square1 === "player1"
-            ? "X"
-            : ""}
-        </div>
-        <div
-          className={
-            gameBoard.square2 === "player2"
-              ? "ttt-square square-2 p2-square"
-              : gameBoard.square2 === "player1"
-              ? "ttt-square square-2 p1-square"
-              : "ttt-square square-2 neutral-square"
-          }
-          onClick={claimSquare}
-        >
-          {gameBoard.square2 === "player2"
-            ? "O"
-            : gameBoard.square2 === "player1"
-            ? "X"
-            : ""}
-        </div>
-        <div
-          className={
-            gameBoard.square3 === "player2"
-              ? "ttt-square square-3 p2-square"
-              : gameBoard.square3 === "player1"
-              ? "ttt-square square-3 p1-square"
-              : "ttt-square square-3 neutral-square"
-          }
-          onClick={claimSquare}
-        >
-          {gameBoard.square3 === "player2"
-            ? "O"
-            : gameBoard.square3 === "player1"
-            ? "X"
-            : ""}
-        </div>
-        <div
-          className={
-            gameBoard.square4 === "player2"
-              ? "ttt-square square-4 p2-square"
-              : gameBoard.square4 === "player1"
-              ? "ttt-square square-4 p1-square"
-              : "ttt-square square-4 neutral-square"
-          }
-          onClick={claimSquare}
-        >
-          {gameBoard.square4 === "player2"
-            ? "O"
-            : gameBoard.square4 === "player1"
-            ? "X"
-            : ""}
-        </div>
-        <div
-          className={
-            gameBoard.square5 === "player2"
-              ? "ttt-square square-5 p2-square"
-              : gameBoard.square5 === "player1"
-              ? "ttt-square square-5 p1-square"
-              : "ttt-square square-5 neutral-square"
-          }
-          onClick={claimSquare}
-        >
-          {gameBoard.square5 === "player2"
-            ? "O"
-            : gameBoard.square5 === "player1"
-            ? "X"
-            : ""}
-        </div>
-        <div
-          className={
-            gameBoard.square6 === "player2"
-              ? "ttt-square square-6 p2-square"
-              : gameBoard.square6 === "player1"
-              ? "ttt-square square-6 p1-square"
-              : "ttt-square square-6 neutral-square"
-          }
-          onClick={claimSquare}
-        >
-          {gameBoard.square6 === "player2"
-            ? "O"
-            : gameBoard.square6 === "player1"
-            ? "X"
-            : ""}
-        </div>
-        <div
-          className={
-            gameBoard.square7 === "player2"
-              ? "ttt-square square-7 p2-square"
-              : gameBoard.square7 === "player1"
-              ? "ttt-square square-7 p1-square"
-              : "ttt-square square-7 neutral-square"
-          }
-          onClick={claimSquare}
-        >
-          {gameBoard.square7 === "player2"
-            ? "O"
-            : gameBoard.square7 === "player1"
-            ? "X"
-            : ""}
-        </div>
-        <div
-          className={
-            gameBoard.square8 === "player2"
-              ? "ttt-square square-8 p2-square"
-              : gameBoard.square8 === "player1"
-              ? "ttt-square square-8 p1-square"
-              : "ttt-square square-8 neutral-square"
-          }
-          onClick={claimSquare}
-        >
-          {gameBoard.square8 === "player2"
-            ? "O"
-            : gameBoard.square8 === "player1"
-            ? "X"
-            : ""}
-        </div>
-        */
