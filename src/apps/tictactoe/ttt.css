@@ -9,13 +9,14 @@
 .ttt-board-cont div {
   width: 100%;
   height: 100%;
+  font-size: 300%;
 }
-.p1-board div:hover {
+/* .p1-board div:hover {
   background: red;
 }
 .p2-board div:hover {
   background: blue;
-}
+} */
 .ttt-square {
   border: 2px solid var(--header-color);
   border-style: hidden;
@@ -23,14 +24,20 @@
   align-items: center;
   justify-content: center;
 }
-.square-one,
-.square-seven {
+.square-1,
+.square-7 {
   border-style: hidden solid hidden solid;
 }
-.square-three,
-.square-five {
+.square-3,
+.square-5 {
   border-style: solid hidden solid hidden;
 }
-.square-four {
+.square-4 {
   border-style: solid;
+}
+.p1-square {
+  background: red;
+}
+.p2-square {
+  background: blue;
 }
