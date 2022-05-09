@@ -116,7 +116,7 @@ function RockPaperScissors() {
   };
 
   return (
-    <div className="game-main">
+    <div className="rps-game-main">
       <div className="game-title-cont">
         <span className="game-title">Rock Paper Scissors</span>
       </div>

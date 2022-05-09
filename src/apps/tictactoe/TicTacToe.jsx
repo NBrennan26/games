@@ -157,7 +157,7 @@ function TicTacToe() {
   };
 
   return (
-    <>
+    <div className="tic-tac-toe-cont">
       <div className="game-title-cont">
         <span className="game-title">Tic-Tac-Toe</span>
       </div>
@@ -230,7 +230,7 @@ function TicTacToe() {
           <button onClick={resetGame}>Play Again?</button>
         </div>
       )}
-    </>
+    </div>
   );
 }
 
