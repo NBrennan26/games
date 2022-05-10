@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import uniqid from "uniqid";
 import Scoreboard from "./Scoreboard";
 import Table from "./Table";
 
@@ -62,7 +61,7 @@ const GameContainer = () => {
   };
 
   return (
-    <div id="game-container">
+    <div id="mc-game-container">
       <Scoreboard
         currentScore={currentScore}
         highScore={highScore}

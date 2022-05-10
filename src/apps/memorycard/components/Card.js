@@ -39,17 +39,27 @@ const Card = (props) => {
   };
 
   return (
-    <div className="card">
+    <div className="mc-card">
       <img
         src={assignImgSrc()}
         alt={props.character}
-        className="card-img"
         id={props.id}
-        onClick={() => props.handleClick(props.id, props.clickCount)}
-        value={props.value}
+        className="card-img"
+        onClick={() => props.handleClick(props.id)}
       />
     </div>
   );
 };
 
 export default Card;
+
+
+  /* <img
+src={assignImgSrc()}
+alt={props.character}
+className="card-img"
+id={props.id}
+onClick={() => props.handleClick(props.id, props.clickCount)}
+value={props.value}
+/> */
+

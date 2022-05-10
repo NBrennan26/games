@@ -1,6 +1,6 @@
 const Scoreboard = (props) => {
   return (
-    <div>
+    <div className="mc-scoreboard">
       <div>Current Score: {props.currentScore}</div>
       <div>High Score: {props.highScore}</div>
       <div>Current Time: {props.currentTime}</div>
