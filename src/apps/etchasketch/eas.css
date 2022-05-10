@@ -1,17 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+
 .etch-sketch-board {
   margin: auto;
-  width: 70vh;
-  height: 70vh;
-  background-color: blue;
+  margin-top: 20px;
+  width: 84vh;
+  height: 56vh;
+  background-color: #afabaa;
+  padding: 5px;
+  border: 10vh solid #d51d25;
+  border-bottom: 25vh solid #d51d25;
+  border-radius: 10px;
+  position: relative;
+}
+.etch-sketch-title {
+  position: absolute;
+  top: -7vh;
+  left: 30%;
+  font-family: "Pacifico", cursive;
+  color: #d1a144;
+  font-size: 5vh;
 }
 .sketch-pad {
   display: grid;
-  grid-template-columns: repeat(30, 1fr);
-  grid-template-rows: repeat(30, 1fr);
+  grid-template-columns: repeat(84, 1fr);
+  grid-template-rows: repeat(56, 1fr);
   height: 100%;
   width: 100%;
+}
+.dial {
+  position: absolute;
+  background: white;
+  height: 15vh;
+  width: 15vh;
+  border-radius: 50%;
+}
+.left-dial {
+  bottom: -20vh;
+  left: -5vh;
+}
+.right-dial {
+  bottom: -20vh;
+  right: -5vh;
 }
 .pixel-item {
   height: 100%;
   width: 100%;
+}
+.filled {
+  background-color: #4b4746;
+}
+.etch-sketch-controls {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+.etch-sketch-btn {
+  margin: 10px;
 }

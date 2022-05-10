@@ -13,6 +13,8 @@ function SketchPad(props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+
+
   return (
     <div className="sketch-pad">
       {boxArr.map((item) => {
