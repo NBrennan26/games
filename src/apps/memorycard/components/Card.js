@@ -45,7 +45,7 @@ const Card = (props) => {
         alt={props.character}
         id={props.id}
         className="card-img"
-        onClick={() => props.handleClick(props.id)}
+        onClick={() => props.handleClick(props.id, props.clicked)}
       />
     </div>
   );
