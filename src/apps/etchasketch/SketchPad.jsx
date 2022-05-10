@@ -5,15 +5,13 @@ function SketchPad(props) {
   const [boxArr, setBoxArr] = useState([]);
 
   useEffect(() => {
-    const curBoxArr = []
+    const curBoxArr = [];
     for (let i = 0; i < props.pixels; i++) {
       curBoxArr.push(i);
     }
-    setBoxArr(curBoxArr)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    setBoxArr(curBoxArr);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-
 
   return (
     <div className="sketch-pad">

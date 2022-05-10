@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
 import SketchPad from "./SketchPad";
 import "./eas.css";
 
 function EtchaSketch() {
-  const [boxSize, setBoxSize] = useState(30);
+
+  const handleReset = () => {
+    window.location.reload(false)
+  }
 
   return (
     <div className="etch-a-sketch-cont">
@@ -14,7 +16,7 @@ function EtchaSketch() {
         <div className="dial right-dial"></div>
       </div>
       <div className="etch-sketch-controls">
-        <button className="etch-sketch-btn">Reset</button>
+        <button className="etch-sketch-btn" onClick={handleReset}>Shake</button>
       </div>
     </div>
   );
