@@ -1,0 +1,58 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  background-color: rgb(238,118,0);
+  color: rgb(255,227,159);
+  max-width: 100%;
+  min-height: 100%;
+}
+#header,
+#footer {
+  background-color: #a15fa9;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #e43f45;
+}
+#header {
+  height: 10vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: calc(7px + 2vmin);
+  text-shadow: 0 0 4px #fde791, 0 0 4px #fde791, 0 0 4px #fde791,
+  0 0 4px #fde791, 0 0 4px #fde791, 0 0 4px #fde791, 0 0 4px #fde791,
+  0 0 4px #fde791, 0 0 4px #fde791, 0 0 4px #fde791, 0 0 4px #fde791,
+  0 0 4px #fde791, 0 0 4px #fde791, 0 0 4px #fde791, 0 0 4px #fde791,
+  0 0 4px #fde791, 0 0 4px #fde791;
+}
+#footer {
+  height: 5vh;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  font-size: calc(1px + 2vmin);
+  text-shadow: 0 0 4px #fde791
+}
+#game-container {
+  margin-top: 10vh;
+  margin-bottom: 6vh;
+}
+.card {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+.card-img {
+  height: 40vw;
+  width: 30vw;
+  max-width: 300px;
+  max-height: 300px;
+}
+#table {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
