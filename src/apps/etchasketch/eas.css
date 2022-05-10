@@ -1,0 +1,17 @@
+.etch-sketch-board {
+  margin: auto;
+  width: 70vh;
+  height: 70vh;
+  background-color: blue;
+}
+.sketch-pad {
+  display: grid;
+  grid-template-columns: repeat(30, 1fr);
+  grid-template-rows: repeat(30, 1fr);
+  height: 100%;
+  width: 100%;
+}
+.pixel-item {
+  height: 100%;
+  width: 100%;
+}

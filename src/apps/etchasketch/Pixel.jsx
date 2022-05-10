@@ -1,10 +1,5 @@
 function Pixel() {
-  return (
-    <>
-      <div>Pixel
-      </div>
-    </>
-  );
+  return <div className="pixel-item"></div>;
 }
 
 export default Pixel;
