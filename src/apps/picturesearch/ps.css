@@ -52,6 +52,7 @@
 }
 .ps-start-btn:hover {
   transform: scale(1.1);
+  filter: brightness(125%);
 }
 .ps-search-img {
   width: 800px;

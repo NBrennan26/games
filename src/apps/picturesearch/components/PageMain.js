@@ -204,9 +204,11 @@ function PageMain() {
 
   // On Click, set mouse coordinates and affirm image params
   const handleClick = (e) => {
-    setCoords(e);
-    setCurrentImg(e.target.id);
-    establishSearchParams();
+    if (curImgSrc !== blank) {
+      setCoords(e);
+      setCurrentImg(e.target.id);
+      establishSearchParams();
+    }
   };
 
   // Set SelectedItem to the item selected in DropMenu
