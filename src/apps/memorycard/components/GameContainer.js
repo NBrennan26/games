@@ -9,10 +9,12 @@ const GameContainer = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [bestTime, setBestTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
+  const [gameWon, setGameWon] = useState(false);
 
   const increaseCurrentScore = () => {
     if (currentScore >= 11) {
       setGameOver(true);
+      setGameWon(true);
     }
     setCurrentScore(currentScore + 1);
   };
@@ -68,6 +70,16 @@ const GameContainer = () => {
       increaseCurrentScore();
     }
   };
+
+  // Check for gameWon, reset accordingly
+  useEffect(() => {
+    if (gameWon) {
+      setCurrentScore(0);
+      setStartTime(0);
+      setCurrentTime(0);
+      setGameWon(false);
+    }
+  }, [gameWon]);
 
   return (
     <div id="mc-game-container">
