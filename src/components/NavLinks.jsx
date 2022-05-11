@@ -16,7 +16,7 @@ function NavLinks(props) {
         <Link to="/memory-card">Memory Card</Link>
       </li>
       <li onClick={props.handleToggle}>
-        <Link to="/picture-search">Picture Search</Link>
+        <Link to="/picture-search/">Picture Search</Link>
       </li>
       <li onClick={props.handleToggle}>
         <Link to="/rock-paper-scissors">Rock Paper Scissors</Link>
