@@ -77,7 +77,7 @@ const GameContainer = () => {
       setCurrentScore(0);
       setStartTime(0);
       setCurrentTime(0);
-      setGameWon(false);
+      // setGameWon(false);
     }
   }, [gameWon]);
 
@@ -93,9 +93,15 @@ const GameContainer = () => {
         <Table handleScore={handleScore} currentScore={currentScore} />
       ) : (
         <div className="mc-game-over">
+          {gameWon ? (
+            <span className="mc-game-over-mess">You Won!</span>
+          ) : (
+            <span className="mc-game-over-mess">Bad Luck this time...</span>
+          )}
           <button
             className="mc-reset-btn"
             onClick={() => {
+              setGameWon(false);
               setGameOver(false);
             }}
           >
