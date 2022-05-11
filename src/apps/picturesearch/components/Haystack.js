@@ -7,11 +7,12 @@ const Haystack = (props) => {
   }, []);
 
   return (
-    <div className="main-comp" id="hay-sec">
-      <span className="img-info">
+    <div className="ps-main-comp" id="hay-sec">
+      <span className="ps-img-info">
         Find the <b>Needle</b> in the haystack
       </span>
       <button
+        className="ps-start-btn"
         style={props.btnStyle}
         onClick={() => {
           props.handleStartClick();
@@ -20,7 +21,7 @@ const Haystack = (props) => {
         Start The Search
       </button>
       <img
-        className="search-img"
+        className="ps-search-img"
         id="hay"
         src={props.curImgSrc}
         alt="hay"

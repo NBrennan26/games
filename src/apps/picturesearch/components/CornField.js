@@ -7,11 +7,12 @@ const CornField = (props) => {
   }, []);
 
   return (
-    <div className="main-comp" id="corn-sec">
-      <span className="img-info">
+    <div className="ps-main-comp" id="corn-sec">
+      <span className="ps-img-info">
         Locate the <b>Hamster</b> and the <b>Pear</b> hidden in the corn
       </span>
       <button
+        className="ps-start-btn"
         style={props.btnStyle}
         onClick={() => {
           props.handleStartClick();
@@ -20,7 +21,7 @@ const CornField = (props) => {
         Start The Search
       </button>
       <img
-        className="search-img"
+        className="ps-search-img"
         id="corn"
         src={props.curImgSrc}
         alt="corn"

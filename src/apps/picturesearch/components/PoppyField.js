@@ -7,11 +7,12 @@ const PoppyField = (props) => {
   }, []);
 
   return (
-    <div className="main-comp" id="poppy-sec">
-      <span className="img-info">
+    <div className="ps-main-comp" id="poppy-sec">
+      <span className="ps-img-info">
         There is a <b>Crab</b> hidden in this field of Poppy
       </span>
       <button
+        className="ps-start-btn"
         style={props.btnStyle}
         onClick={() => {
           props.handleStartClick();
@@ -20,7 +21,7 @@ const PoppyField = (props) => {
         Start The Search
       </button>
       <img
-        className="search-img"
+        className="ps-search-img"
         id="poppy"
         src={props.curImgSrc}
         alt="poppy"

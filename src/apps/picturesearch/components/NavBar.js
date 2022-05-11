@@ -2,40 +2,40 @@ import { NavLink } from "react-router-dom";
 
 function NavBar() {
   return (
-    <nav id="navbar">
-      <ul className="nav-links">
+    <nav id="ps-navbar">
+      <ul className="ps-nav-links">
         <li>
-          <NavLink className="nav-link" to="/picture-search/">
+          <NavLink className="ps-nav-link" to="/picture-search/">
             Home
           </NavLink>
         </li>
         |
         <li>
-          <NavLink className="nav-link" to="/picture-search/poppy">
+          <NavLink className="ps-nav-link" to="/picture-search/poppy">
             Poppy
           </NavLink>
         </li>
         |
         <li>
-          <NavLink className="nav-link" to="/picture-search/corn">
+          <NavLink className="ps-nav-link" to="/picture-search/corn">
             Corn
           </NavLink>
         </li>
         |
         <li>
-          <NavLink className="nav-link" to="/picture-search/squirrel">
+          <NavLink className="ps-nav-link" to="/picture-search/squirrel">
             Squirrel
           </NavLink>
         </li>
         |
         <li>
-          <NavLink className="nav-link" to="/picture-search/hay">
+          <NavLink className="ps-nav-link" to="/picture-search/hay">
             Hay
           </NavLink>
         </li>
         |
         <li>
-          <NavLink className="nav-link" to="/picture-search/scores">
+          <NavLink className="ps-nav-link" to="/picture-search/scores">
             Leaderboard
           </NavLink>
         </li>

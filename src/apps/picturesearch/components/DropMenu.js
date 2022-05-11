@@ -1,6 +1,6 @@
 const DropMenu = (props) => {
   return (
-    <div id="drop-menu" style={props.dropMenuStyle}>
+    <div id="ps-drop-menu" style={props.dropMenuStyle}>
       <form>
         <select
           name="itemSelect"

@@ -1,8 +1,8 @@
 const PopUp = (props) => {
   return (
-    <div id="drop-menu" style={props.popUpStyle}>
-      <div id="popup-box">
-        <form id="popup-form" onChange={props.handleUserInitials}>
+    <div id="ps-drop-menu" style={props.popUpStyle}>
+      <div id="ps-popup-box">
+        <form id="ps-popup-form" onChange={props.handleUserInitials}>
           <label>
             {" "}
             <b>Well Done!</b> <br /> <br />

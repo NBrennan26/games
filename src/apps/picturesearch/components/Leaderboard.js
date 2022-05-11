@@ -45,11 +45,11 @@ const Leaderboard = (props) => {
   };
 
   return (
-    <div className="main-comp" id="score-sec">
-      <div id="board-container">
-        <div id="board-nav">
+    <div className="ps-main-comp" id="ps-score-sec">
+      <div id="ps-board-container">
+        <div id="ps-board-nav">
           <button
-            className="score-btn"
+            className="ps-score-btn"
             style={setBtnStyle("poppy")}
             onClick={() => {
               buildLeaderboard("poppy");
@@ -59,7 +59,7 @@ const Leaderboard = (props) => {
             Poppy
           </button>
           <button
-            className="score-btn"
+            className="ps-score-btn"
             style={setBtnStyle("corn")}
             onClick={() => {
               buildLeaderboard("corn");
@@ -68,7 +68,7 @@ const Leaderboard = (props) => {
             Corn
           </button>
           <button
-            className="score-btn"
+            className="ps-score-btn"
             style={setBtnStyle("squirrel")}
             onClick={() => {
               buildLeaderboard("squirrel");
@@ -77,7 +77,7 @@ const Leaderboard = (props) => {
             Squirrel
           </button>
           <button
-            className="score-btn"
+            className="ps-score-btn"
             style={setBtnStyle("hay")}
             onClick={() => {
               buildLeaderboard("hay");
@@ -86,7 +86,7 @@ const Leaderboard = (props) => {
             Hay
           </button>
           <button
-            className="score-btn"
+            className="ps-score-btn"
             style={setBtnStyle("all")}
             onClick={() => {
               buildLeaderboard("all");
@@ -95,11 +95,11 @@ const Leaderboard = (props) => {
             All
           </button>
         </div>
-        <div id="board-display">
-          <ul id="leader-list">
+        <div id="ps-board-display">
+          <ul id="ps-leader-list">
             {selectData.map((item) => {
               return (
-                <li key={uniqid()} className="ldr-list-item">
+                <li key={uniqid()} className="ps-ldr-list-item">
                   <span>{item.name}</span>
                   <span>{item.image}</span>
                   <span>{item.time} sec</span>
