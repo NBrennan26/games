@@ -8,15 +8,21 @@ const GameContainer = () => {
   const [startTime, setStartTime] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [bestTime, setBestTime] = useState(null);
+  const [gameOver, setGameOver] = useState(false);
 
   const increaseCurrentScore = () => {
+    if (currentScore >= 11) {
+      setGameOver(true);
+    }
     setCurrentScore(currentScore + 1);
   };
 
   const resetCurrentScore = () => {
     setCurrentScore(0);
+    setGameOver(true);
   };
 
+  // Start timer, set best time if needed
   const handleTimer = () => {
     if (currentScore === 0) {
       setStartTime(Date.now());
@@ -31,6 +37,7 @@ const GameContainer = () => {
     }
   };
 
+  // Update times
   useEffect(() => {
     const timer = setInterval(() => {
       if (currentScore > 0) {
@@ -43,16 +50,18 @@ const GameContainer = () => {
       }
     }, 1000);
     return () => clearInterval(timer);
-  }, [startTime, currentTime, currentScore]);
+  }, [startTime, currentTime, currentScore, gameOver, bestTime]);
 
+  // Check and update highscore if needed
   useEffect(() => {
     if (currentScore > highScore) {
       setHighScore(currentScore);
     }
   }, [currentScore, highScore]);
 
-  const handleScore = (count) => {
-    if (count >= 1) {
+  // Check if clicked, and handle score
+  const handleScore = (clicked) => {
+    if (clicked) {
       resetCurrentScore();
     } else {
       handleTimer();
@@ -68,7 +77,20 @@ const GameContainer = () => {
         currentTime={currentTime}
         bestTime={bestTime}
       />
-      <Table handleScore={handleScore} currentScore={currentScore} />
+      {!gameOver ? (
+        <Table handleScore={handleScore} currentScore={currentScore} />
+      ) : (
+        <div className="mc-game-over">
+          <button
+            className="mc-reset-btn"
+            onClick={() => {
+              setGameOver(false);
+            }}
+          >
+            Play Again?
+          </button>
+        </div>
+      )}
     </div>
   );
 };

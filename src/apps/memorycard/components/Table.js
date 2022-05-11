@@ -6,7 +6,6 @@ const Table = (props) => {
   const [deck, setDeck] = useState([]);
 
   let deckBuilt = false;
-  let deckComplete = false;
 
   // Fischer Yates Algorithm to Shuffle
   const fischerYates = () => {
@@ -25,8 +24,6 @@ const Table = (props) => {
 
   // Build Card for each character (Called by buildDeck)
   const buildCard = (id, character) => {
-    console.log("Building Card...");
-
     const newCard = {
       id: id,
       character,
@@ -38,12 +35,8 @@ const Table = (props) => {
 
   // Build a deck of 12 cards
   const buildDeck = () => {
-    console.log("Building Deck...");
     for (let i = 0; i < 12; i++) {
       buildCard(i, assignCharacter(i));
-      if (i === 11) {
-        deckComplete = true;
-      }
     }
   };
 
@@ -77,8 +70,6 @@ const Table = (props) => {
   // Trigger Deck Creation on load (if no deck exists yet)
   useEffect(() => {
     if (deck.length === 0 && !deckBuilt) {
-      console.log("Trigger Deck Creation...");
-      console.log(deckBuilt);
       deckBuilt = true;
       buildDeck();
     }
@@ -86,8 +77,6 @@ const Table = (props) => {
 
   // Shuffle Deck using fischerYates shuffled array
   const shuffleDeck = () => {
-    console.log("Shuffling...");
-    console.log(deck);
     if (deck.length > 0) {
       const ranArray = fischerYates();
       const mappedDeck = deck.map((card) => {
@@ -103,7 +92,6 @@ const Table = (props) => {
       });
       setDeck(mappedDeck);
     }
-    console.log(deck);
   };
 
   // Shuffle current Deck
@@ -113,28 +101,26 @@ const Table = (props) => {
 
   // Handle Click
   const handleClick = (id, clicked) => {
-    console.log("click")
-    console.log(id)
-    console.log(clicked)
+    console.log("click");
+    console.log(clicked);
     if (!clicked) {
       // First Click
       const mappedDeck = deck.map((card) => {
         if (card.id === id) {
           // const curCard = card
-          const source = { clicked: true }
-          const newCard = Object.assign(card, source)
-          return newCard
+          const source = { clicked: true };
+          const newCard = Object.assign(card, source);
+          return newCard;
         }
-        return card
-      })
-      setDeck(mappedDeck)
-      shuffleDeck()
+        return card;
+      });
+      setDeck(mappedDeck);
+      shuffleDeck();
+      props.handleScore(clicked)
     } else {
       // Already clicked
-      console.log("Already clicked")
-      // Stop Timer/Reset Current Time
-      // Reset Current Score
-      // Update Best Time as needed
+      console.log("Already clicked");
+      props.handleScore(clicked)
       // Prompt play again
     }
   };
@@ -144,9 +130,28 @@ const Table = (props) => {
     shuffleDeck();
   }, [props.currentScore]);
 
+  // useEffect(() => {
+  //   console.log(deck);
+  // }, [deck]);
+
+  // Reset clicked
+  const resetClicked = () => {
+    if (props.currentScore === 0 && deck.length > 0) {
+      const mappedDeck = deck.map((card) => {
+        const source = { clicked: false };
+        const newCard = Object.assign(card, source);
+        return newCard;
+      });
+      setDeck(mappedDeck);
+    }
+  };
+
+  // Shuffle and reset click if score is reset
   useEffect(() => {
-    console.log(deck);
-  }, [deck]);
+    shuffleDeck();
+    resetClicked();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.currentScore]);
 
   return (
     <div id="table">
@@ -165,23 +170,3 @@ const Table = (props) => {
 };
 
 export default Table;
-
-/*
-const resetClickCount = () => {
-  if (props.currentScore === 0 && deck.length > 0) {
-    const mappedDeck = deck.map((card) => {
-      const source = { clickCount: 0 };
-      const newCard = Object.assign(card, source);
-      return newCard;
-    });
-    setDeck(mappedDeck);
-  }
-};
-
-useEffect(() => {
-  shuffleDeck();
-  resetClickCount();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, [props.currentScore]);
-
-*/

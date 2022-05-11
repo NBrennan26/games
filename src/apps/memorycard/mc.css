@@ -40,6 +40,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 5px 0;
 }
 .card-img {
   height: 20vh;
@@ -47,4 +48,20 @@
   max-width: 300px;
   max-height: 300px;
 }
-
+.mc-game-over {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20vh;
+}
+.mc-reset-btn {
+  color: rgb(255, 227, 159);
+  padding: 20px;
+  border-radius: 25px;
+  background: #d72b48;
+  border: 2px solid black;
+  transition: transform 0.1s;
+}
+.mc-reset-btn:hover {
+  transform: scale(1.3);
+}
