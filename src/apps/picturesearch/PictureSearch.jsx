@@ -1,14 +1,12 @@
+import "./ps.css";
+import NavBar from "./components/NavBar";
+import PageMain from "./components/PageMain";
+
 function PictureSearch() {
   return (
     <>
-      <div className="game-title-cont">
-        <span className="game-title">Picture Search</span>
-      </div>
-      <div className="game-board">
-        <div className="scorebaord"></div>
-        <div className="game-controls"></div>
-        <div className="game-scripts"></div>
-      </div>
+      <NavBar />
+      <PageMain />
     </>
   );
 }
