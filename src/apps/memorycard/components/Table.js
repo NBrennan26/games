@@ -113,6 +113,9 @@ const Table = (props) => {
 
   // Handle Click
   const handleClick = (id, clicked) => {
+    console.log("click")
+    console.log(id)
+    console.log(clicked)
     if (!clicked) {
       // First Click
       const mappedDeck = deck.map((card) => {
@@ -125,25 +128,15 @@ const Table = (props) => {
         return card
       })
       setDeck(mappedDeck)
+      shuffleDeck()
     } else {
       // Already clicked
+      console.log("Already clicked")
+      // Stop Timer/Reset Current Time
+      // Reset Current Score
+      // Update Best Time as needed
+      // Prompt play again
     }
-
-    // const newCount = count;
-    // const tgt = id;
-    // const mappedDeck = deck.map((card) => {
-    //   if (card.id === tgt) {
-    //     const curCard = card;
-    //     const curCount = card.clickCount;
-    //     const newCount = curCount + 1;
-    //     const source = { clickCount: newCount };
-    //     const newCard = Object.assign(curCard, source);
-    //     return newCard;
-    //   }
-    //   return card;
-    // });
-    // setDeck(mappedDeck);
-    // props.handleScore(newCount);
   };
 
   // Shuffle when score changes (when card clicked)
@@ -162,8 +155,8 @@ const Table = (props) => {
           key={item.id}
           id={item.id}
           character={item.character}
-          value={item.value}
-          clickCount={item.clickCount}
+          position={item.position}
+          clicked={item.clicked}
           handleClick={handleClick}
         />
       ))}
