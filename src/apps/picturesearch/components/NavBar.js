@@ -1,4 +1,3 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 
 function NavBar() {
@@ -6,37 +5,37 @@ function NavBar() {
     <nav id="navbar">
       <ul className="nav-links">
         <li>
-          <NavLink className="nav-link" to="/">
+          <NavLink className="nav-link" to="/picture-search/">
             Home
           </NavLink>
         </li>
         |
         <li>
-          <NavLink className="nav-link" to="/poppy">
+          <NavLink className="nav-link" to="/picture-search/poppy">
             Poppy
           </NavLink>
         </li>
         |
         <li>
-          <NavLink className="nav-link" to="/corn">
+          <NavLink className="nav-link" to="/picture-search/corn">
             Corn
           </NavLink>
         </li>
         |
         <li>
-          <NavLink className="nav-link" to="/squirrel">
+          <NavLink className="nav-link" to="/picture-search/squirrel">
             Squirrel
           </NavLink>
         </li>
         |
         <li>
-          <NavLink className="nav-link" to="/hay">
+          <NavLink className="nav-link" to="/picture-search/hay">
             Hay
           </NavLink>
         </li>
         |
         <li>
-          <NavLink className="nav-link" to="/scores">
+          <NavLink className="nav-link" to="/picture-search/scores">
             Leaderboard
           </NavLink>
         </li>

@@ -20,7 +20,7 @@ function App() {
             <Route path="/battleship" element={<Battleship />} />
             <Route path="/etchasketch" element={<EtchaSketch />} />
             <Route path="/memory-card" element={<MemoryCard />} />
-            <Route path="/picture-search" element={<PictureSearch />} />
+            <Route path="/picture-search/*" element={<PictureSearch />} />
             <Route
               path="/rock-paper-scissors"
               element={<RockPaperScissors />}

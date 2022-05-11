@@ -1,5 +1,3 @@
-import React from "react";
-
 const PopUp = (props) => {
   return (
     <div id="drop-menu" style={props.popUpStyle}>
