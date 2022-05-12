@@ -17,13 +17,14 @@ function PlayerBoard(props) {
     }
     setBoardArr(curBoardArr);
     props.setPlayerBoard(curBoardArr)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
-      <div className="bs-player-board">
+      <div className={`bs-player-board ${props.player}-board`}>
         {boardArr.map((square) => {
-          return <BoardSquare square={square} key={square.index} />;
+          return <BoardSquare square={square} key={square.index} handlePlaceShip={props.handlePlaceShip} />;
         })}
       </div>
     </>
