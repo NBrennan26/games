@@ -12,10 +12,9 @@ function Battleship() {
   const [p1Board, setP1Board] = useState([]);
   const [p2Board, setP2Board] = useState([]);
 
+  let p1ShipsPlaced = 0
+
   const handlePlaceShip = (e) => {
-    console.log(e.target.parentElement.classList[1]);
-    console.log(e.target.classList[1]);
-    console.log(p1Board[e.target.classList[1]]);
     if (e.target.parentElement.classList[1] === "player1-board") {
       let square = p1Board[e.target.classList[1]];
       square.hasShip = true;
@@ -43,17 +42,14 @@ function Battleship() {
     const p2Cruise = buildShip("Cruiser", 3, 2);
     const p2Dest = buildShip("Destroyer", 2, 2);
 
-    let p1Fleet = []
-    let p2Fleet = []
+    let p1Ships = []
+    let p2Ships = []
 
-    p1Fleet.push(p1Carrier, p1Battle, p1Sub, p1Cruise, p1Dest)
-    p2Fleet.push(p2Carrier, p2Battle, p2Sub, p2Cruise, p2Dest)
+    p1Ships.push(p1Carrier, p1Battle, p1Sub, p1Cruise, p1Dest)
+    p2Ships.push(p2Carrier, p2Battle, p2Sub, p2Cruise, p2Dest)
 
-    console.log("//////")
-    console.log("fleets")
-    console.log("//////")
-    console.log(p1Fleet)
-    console.log(p2Fleet)
+    setP1Fleet(p1Ships)
+    setP2Fleet(p2Ships)
   }, [])
 
 
