@@ -1,7 +1,9 @@
-function BoardSquare() {
+function BoardSquare(props) {
   return (
     <>
-      <div className="bs-board-square">S</div>
+      <div className={`bs-board-square ${props.square.index}`}>
+        {props.square.index}
+      </div>
     </>
   );
 }
