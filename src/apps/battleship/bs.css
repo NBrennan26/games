@@ -46,3 +46,6 @@
   align-items: center;
   border: 1px solid green;
 }
+.ship {
+  background-color: red;
+}

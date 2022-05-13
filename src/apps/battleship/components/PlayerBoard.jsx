@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import BoardSquare from "./BoardSquare";
 
 function PlayerBoard(props) {
+  const { playerBoard, setPlayerBoard, handlePlaceShip, player, counter } =
+    props;
+
   const [boardArr, setBoardArr] = useState([]);
 
   useEffect(() => {
@@ -16,15 +19,30 @@ function PlayerBoard(props) {
       curBoardArr.push(square);
     }
     setBoardArr(curBoardArr);
-    props.setPlayerBoard(curBoardArr)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    setPlayerBoard(curBoardArr);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // useEffect(() => {
+  //   console.log(playerBoard);
+  //   let curBoardArr = playerBoard;
+  //   console.log("curBoardArr", curBoardArr);
+  //   setBoardArr(curBoardArr);
+  // }, [playerBoard, props, counter]);
 
   return (
     <>
-      <div className={`bs-player-board ${props.player}-board`}>
+      <div className={`bs-player-board ${player}-board`}>
         {boardArr.map((square) => {
-          return <BoardSquare square={square} key={square.index} handlePlaceShip={props.handlePlaceShip} />;
+          return (
+            <BoardSquare
+              square={square}
+              key={square.index}
+              handlePlaceShip={handlePlaceShip}
+              player={player}
+              counter={counter}
+            />
+          );
         })}
       </div>
     </>

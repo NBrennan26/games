@@ -1,20 +1,25 @@
 import PlayerBoard from "./PlayerBoard";
 
 function GameBoard(props) {
+  const { p1Board, setP1Board, p2Board, setP2Board, handlePlaceShip, counter } =
+    props;
+
   return (
     <>
       <div className="bs-board">
         <PlayerBoard
-          playerBoard={props.p1Board}
-          setPlayerBoard={props.setP1Board}
-          handlePlaceShip={props.handlePlaceShip}
+          playerBoard={p1Board}
+          setPlayerBoard={setP1Board}
+          handlePlaceShip={handlePlaceShip}
           player="player1"
+          counter={counter}
         />
         <PlayerBoard
-          playerBoard={props.p2Board}
-          setPlayerBoard={props.setP2Board}
-          handlePlaceShip={props.handlePlaceShip}
+          playerBoard={p2Board}
+          setPlayerBoard={setP2Board}
+          handlePlaceShip={handlePlaceShip}
           player="player2"
+          counter={counter}
         />
       </div>
     </>

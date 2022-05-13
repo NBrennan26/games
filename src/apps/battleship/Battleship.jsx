@@ -5,21 +5,25 @@ import buildShip from "./features/scripts/buildship";
 import "./bs.css";
 
 function Battleship() {
-  const [player1, setPlayer1] = useState({});
-  const [player2, setPlayer2] = useState({});
+  // const [player1, setPlayer1] = useState({});
+  // const [player2, setPlayer2] = useState({});
   const [p1Fleet, setP1Fleet] = useState([]);
   const [p2Fleet, setP2Fleet] = useState([]);
   const [p1Board, setP1Board] = useState([]);
   const [p2Board, setP2Board] = useState([]);
-
-  let p1ShipsPlaced = 0;
-  let p2ShipsPlaced = 0;
+  const [counter, setCounter] = useState({ player1: 0, player2: 0 });
+  const [p1ShipsPlaced, setP1ShipsPlaced] = useState(0)
+  const [p2ShipsPlaced, setP2ShipsPlaced] = useState(0)
 
   const handlePlaceShip = (e) => {
+    // Check which board was clicked
     if (e.target.parentElement.classList[1] === "player1-board") {
+      // Check if there are still ships to place (0-4)
       if (p1Fleet[p1ShipsPlaced]) {
+        // Add ship's grids to the ship in the fleet
         p1Fleet[p1ShipsPlaced].placeShip(e.target.classList[1]);
 
+        // For each ship's grid, mark as hasShip on board
         p1Fleet[p1ShipsPlaced].grids.forEach((grid) => {
           let square = p1Board[grid.coord];
           square.hasShip = true;
@@ -28,9 +32,15 @@ function Battleship() {
           setP1Board(board);
         });
 
-        p1ShipsPlaced += 1;
+        // Increase Counters
+        setP1ShipsPlaced(p1ShipsPlaced + 1)
+        setCounter({
+          player1: counter.player1 + 1,
+          player2: counter.player2,
+        });
       }
     } else {
+      // Same, but for player 2
       if (p2Fleet[p2ShipsPlaced]) {
         p2Fleet[p2ShipsPlaced].placeShip(e.target.classList[1]);
 
@@ -42,11 +52,17 @@ function Battleship() {
           setP2Board(board);
         });
 
-        p2ShipsPlaced += 1;
+        setP1ShipsPlaced(p2ShipsPlaced + 1)
+        // p2ShipsPlaced += 1;
+        setCounter({
+          player1: counter.player1,
+          player2: counter.player2 + 1,
+        });
       }
     }
   };
 
+  // Create ships and add them to player fleets
   useEffect(() => {
     const p1Carrier = buildShip("Carrier", 5, 1);
     const p1Battle = buildShip("Battleship", 4, 1);
@@ -69,10 +85,13 @@ function Battleship() {
     setP2Fleet(p2Ships);
   }, []);
 
-  useEffect(() => {
-    console.log(p1Board);
-    console.log(p2Board);
-  }, [p1Board, p2Board]);
+
+  // useEffect(() => {
+  //   console.log(p1Fleet);
+  //   console.log(p1Board);
+  //   console.log(p2Fleet);
+  //   console.log(p2Board);
+  // }, [p1Board, p2Board, p1Fleet, p2Fleet]);
 
   return (
     <div className="battleship-cont">
@@ -86,6 +105,7 @@ function Battleship() {
           p2Board={p2Board}
           setP2Board={setP2Board}
           handlePlaceShip={handlePlaceShip}
+          counter={counter}
         />
         <GameData />
       </div>
