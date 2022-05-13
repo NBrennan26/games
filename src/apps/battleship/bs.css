@@ -33,7 +33,6 @@
 /* Player Boards */
 /*****************/
 .bs-player-board {
-  border: 2px solid pink;
   width: 45vh;
   height: 45vh;
   display: grid;

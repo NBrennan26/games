@@ -12,21 +12,38 @@ function Battleship() {
   const [p1Board, setP1Board] = useState([]);
   const [p2Board, setP2Board] = useState([]);
 
-  let p1ShipsPlaced = 0
+  let p1ShipsPlaced = 0;
+  let p2ShipsPlaced = 0;
 
   const handlePlaceShip = (e) => {
     if (e.target.parentElement.classList[1] === "player1-board") {
-      let square = p1Board[e.target.classList[1]];
-      square.hasShip = true;
-      let board = p1Board;
-      board[e.target.classList[1]] = square;
-      setP1Board(board);
+      if (p1Fleet[p1ShipsPlaced]) {
+        p1Fleet[p1ShipsPlaced].placeShip(e.target.classList[1]);
+
+        p1Fleet[p1ShipsPlaced].grids.forEach((grid) => {
+          let square = p1Board[grid.coord];
+          square.hasShip = true;
+          let board = p1Board;
+          board[grid.coord] = square;
+          setP1Board(board);
+        });
+
+        p1ShipsPlaced += 1;
+      }
     } else {
-      let square = p2Board[e.target.classList[1]];
-      square.hasShip = true;
-      let board = p2Board;
-      board[e.target.classList[1]] = square;
-      setP2Board(board);
+      if (p2Fleet[p2ShipsPlaced]) {
+        p2Fleet[p2ShipsPlaced].placeShip(e.target.classList[1]);
+
+        p2Fleet[p2ShipsPlaced].grids.forEach((grid) => {
+          let square = p2Board[grid.coord];
+          square.hasShip = true;
+          let board = p2Board;
+          board[grid.coord] = square;
+          setP2Board(board);
+        });
+
+        p2ShipsPlaced += 1;
+      }
     }
   };
 
@@ -42,16 +59,15 @@ function Battleship() {
     const p2Cruise = buildShip("Cruiser", 3, 2);
     const p2Dest = buildShip("Destroyer", 2, 2);
 
-    let p1Ships = []
-    let p2Ships = []
+    let p1Ships = [];
+    let p2Ships = [];
 
-    p1Ships.push(p1Carrier, p1Battle, p1Sub, p1Cruise, p1Dest)
-    p2Ships.push(p2Carrier, p2Battle, p2Sub, p2Cruise, p2Dest)
+    p1Ships.push(p1Carrier, p1Battle, p1Sub, p1Cruise, p1Dest);
+    p2Ships.push(p2Carrier, p2Battle, p2Sub, p2Cruise, p2Dest);
 
-    setP1Fleet(p1Ships)
-    setP2Fleet(p2Ships)
-  }, [])
-
+    setP1Fleet(p1Ships);
+    setP2Fleet(p2Ships);
+  }, []);
 
   useEffect(() => {
     console.log(p1Board);

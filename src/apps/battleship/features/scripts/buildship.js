@@ -5,7 +5,7 @@ const buildShip = function (name, length, player) {
     player: player,
     grids: [],
     isSunk: false,
-    orientation: "horizontal",
+    orientation: "Horizontal",
     status: "Okay",
 
     // grid {coord: Num, hit: false}
@@ -14,7 +14,7 @@ const buildShip = function (name, length, player) {
     placeShip(grid) {
       let gridNo = parseInt(grid);
       let shipArr = [];
-      if (length === 5 && this.direction === "Horizontal") {
+      if (length === 5 && this.orientation === "Horizontal") {
         if (
           ![
             6, 7, 8, 9, 16, 17, 18, 19, 26, 27, 28, 29, 36, 37, 38, 39, 46, 47,
@@ -25,26 +25,26 @@ const buildShip = function (name, length, player) {
           //Place the Ship
           for (let i = 0; i < length; i++) {
             this.grids[i] = {
-              gridCoord: gridNo + i,
-              gridHit: false,
+              coord: gridNo + i,
+              hit: false,
             };
             shipArr.push(gridNo + i);
           }
         }
       }
-      if (length === 5 && this.direction === "Vertical") {
+      if (length === 5 && this.orientation === "Vertical") {
         if (gridNo <= 60) {
           //Place the Ship
           for (let i = 0; i < length; i++) {
             this.grids[i] = {
-              gridCoord: gridNo + i * 10,
-              gridHit: false,
+              coord: gridNo + i * 10,
+              hit: false,
             };
             shipArr.push(gridNo + i * 10);
           }
         }
       }
-      if (length === 4 && this.direction === "Horizontal") {
+      if (length === 4 && this.orientation === "Horizontal") {
         if (
           ![
             7, 8, 9, 17, 18, 19, 27, 28, 29, 37, 38, 39, 47, 48, 49, 57, 58, 59,
@@ -54,26 +54,26 @@ const buildShip = function (name, length, player) {
           //Place the Ship
           for (let i = 0; i < length; i++) {
             this.grids[i] = {
-              gridCoord: gridNo + i,
-              gridHit: false,
+              coord: gridNo + i,
+              hit: false,
             };
             shipArr.push(gridNo + i);
           }
         }
       }
-      if (length === 4 && this.direction === "Vertical") {
+      if (length === 4 && this.orientation === "Vertical") {
         if (gridNo <= 70) {
           //Place the Ship
           for (let i = 0; i < length; i++) {
             this.grids[i] = {
-              gridCoord: gridNo + i * 10,
-              gridHit: false,
+              coord: gridNo + i * 10,
+              hit: false,
             };
             shipArr.push(gridNo + i * 10);
           }
         }
       }
-      if (length === 3 && this.direction === "Horizontal") {
+      if (length === 3 && this.orientation === "Horizontal") {
         if (
           ![
             8, 9, 18, 19, 28, 29, 38, 39, 48, 49, 58, 59, 68, 69, 78, 79, 88,
@@ -83,44 +83,44 @@ const buildShip = function (name, length, player) {
           //Place the Ship
           for (let i = 0; i < length; i++) {
             this.grids[i] = {
-              gridCoord: gridNo + i,
-              gridHit: false,
+              coord: gridNo + i,
+              hit: false,
             };
             shipArr.push(gridNo + i);
           }
         }
       }
-      if (length === 3 && this.direction === "Vertical") {
+      if (length === 3 && this.orientation === "Vertical") {
         if (gridNo <= 80) {
           //Place the Ship
           for (let i = 0; i < length; i++) {
             this.grids[i] = {
-              gridCoord: gridNo + i * 10,
-              gridHit: false,
+              coord: gridNo + i * 10,
+              hit: false,
             };
             shipArr.push(gridNo + i * 10);
           }
         }
       }
-      if (length === 2 && this.direction === "Horizontal") {
+      if (length === 2 && this.orientation === "Horizontal") {
         if (![9, 19, 29, 39, 49, 59, 69, 79, 89, 99].includes(gridNo)) {
           //Place the Ship
           for (let i = 0; i < length; i++) {
             this.grids[i] = {
-              gridCoord: gridNo + i,
-              gridHit: false,
+              coord: gridNo + i,
+              hit: false,
             };
             shipArr.push(gridNo + i);
           }
         }
       }
-      if (length === 2 && this.direction === "Vertical") {
+      if (length === 2 && this.orientation === "Vertical") {
         if (gridNo <= 90) {
           //Place the Ship
           for (let i = 0; i < length; i++) {
             this.grids[i] = {
-              gridCoord: gridNo + i * 10,
-              gridHit: false,
+              coord: gridNo + i * 10,
+              hit: false,
             };
             shipArr.push(gridNo + i * 10);
           }
@@ -131,10 +131,10 @@ const buildShip = function (name, length, player) {
 
     // Rotate Ship (Horizontal/Vertical)
     rotateShip() {
-      if (this.direction === "horizontal") {
-        this.direction = "vertical";
+      if (this.orientation === "Horizontal") {
+        this.orientation = "Vertical";
       } else {
-        this.direction = "Horizontal";
+        this.orientation = "Horizontal";
       }
     },
 
