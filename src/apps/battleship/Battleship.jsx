@@ -3,6 +3,7 @@ import GameBoard from "./components/GameBoard";
 import GameData from "./components/GameData";
 import buildShip from "./features/scripts/buildship";
 import checkOverflow from "./features/scripts/checkOverflow";
+import checkCollision from "./features/scripts/checkCollision";
 import "./bs.css";
 
 function Battleship() {
@@ -45,23 +46,18 @@ function Battleship() {
       // Check if there are still ships to place (0-4)
 
       if (p1Fleet[p1ShipsPlaced]) {
-        // Check for overflow
-        console.log(e.target.classList[1]);
-        console.log(p1Fleet[p1ShipsPlaced].length);
-        console.log(p1Fleet[p1ShipsPlaced].orientation);
-  
-        console.log(
-          checkOverflow(
-            e.target.classList[1],
-            p1Fleet[p1ShipsPlaced].length,
-            p1Fleet[p1ShipsPlaced].orientation
-          )
-        );
+        // Check for overflow && collision with already placed ship
         if (
           checkOverflow(
             e.target.classList[1],
             p1Fleet[p1ShipsPlaced].length,
             p1Fleet[p1ShipsPlaced].orientation
+          ) &&
+          checkCollision(
+            e.target.classList[1],
+            p1Fleet[p1ShipsPlaced].length,
+            p1Fleet[p1ShipsPlaced].orientation,
+            p1Board
           )
         ) {
           // Add ship's grids to the ship in the fleet
@@ -106,25 +102,6 @@ function Battleship() {
       }
     }
   };
-
-  // const checkCollision = function (grid, length, dir) {
-  //   let counter = 0;
-  //   for (let i = 0; i < length; i++) {
-  //     if (dir === "Horizontal") {
-  //       if (!p1.board.board[grid - 1 + i].hasShip) {
-  //         counter += 1;
-  //       }
-  //     }
-  //     if (dir === "Vertical") {
-  //       if (!p1.board.board[grid - 1 + i * 10].hasShip) {
-  //         counter += 1;
-  //       }
-  //     }
-  //   }
-  //   if (counter === length) {
-  //     return true;
-  //   }
-  // };
 
   // useEffect(() => {
   //   console.log(p1Fleet);
