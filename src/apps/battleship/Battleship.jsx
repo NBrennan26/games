@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import GameBoard from "./components/GameBoard";
 import GameData from "./components/GameData";
 import buildShip from "./features/scripts/buildship";
+import checkOverflow from "./features/scripts/checkOverflow";
 import "./bs.css";
 
 function Battleship() {
@@ -12,55 +13,8 @@ function Battleship() {
   const [p1Board, setP1Board] = useState([]);
   const [p2Board, setP2Board] = useState([]);
   const [counter, setCounter] = useState({ player1: 0, player2: 0 });
-  const [p1ShipsPlaced, setP1ShipsPlaced] = useState(0)
-  const [p2ShipsPlaced, setP2ShipsPlaced] = useState(0)
-
-  const handlePlaceShip = (e) => {
-    // Check which board was clicked
-    if (e.target.parentElement.classList[1] === "player1-board") {
-      // Check if there are still ships to place (0-4)
-      if (p1Fleet[p1ShipsPlaced]) {
-        // Add ship's grids to the ship in the fleet
-        p1Fleet[p1ShipsPlaced].placeShip(e.target.classList[1]);
-
-        // For each ship's grid, mark as hasShip on board
-        p1Fleet[p1ShipsPlaced].grids.forEach((grid) => {
-          let square = p1Board[grid.coord];
-          square.hasShip = true;
-          let board = p1Board;
-          board[grid.coord] = square;
-          setP1Board(board);
-        });
-
-        // Increase Counters
-        setP1ShipsPlaced(p1ShipsPlaced + 1)
-        setCounter({
-          player1: counter.player1 + 1,
-          player2: counter.player2,
-        });
-      }
-    } else {
-      // Same, but for player 2
-      if (p2Fleet[p2ShipsPlaced]) {
-        p2Fleet[p2ShipsPlaced].placeShip(e.target.classList[1]);
-
-        p2Fleet[p2ShipsPlaced].grids.forEach((grid) => {
-          let square = p2Board[grid.coord];
-          square.hasShip = true;
-          let board = p2Board;
-          board[grid.coord] = square;
-          setP2Board(board);
-        });
-
-        setP1ShipsPlaced(p2ShipsPlaced + 1)
-        // p2ShipsPlaced += 1;
-        setCounter({
-          player1: counter.player1,
-          player2: counter.player2 + 1,
-        });
-      }
-    }
-  };
+  const [p1ShipsPlaced, setP1ShipsPlaced] = useState(0);
+  const [p2ShipsPlaced, setP2ShipsPlaced] = useState(0);
 
   // Create ships and add them to player fleets
   useEffect(() => {
@@ -85,6 +39,92 @@ function Battleship() {
     setP2Fleet(p2Ships);
   }, []);
 
+  const handlePlaceShip = (e) => {
+    // Check which board was clicked
+    if (e.target.parentElement.classList[1] === "player1-board") {
+      // Check if there are still ships to place (0-4)
+
+      if (p1Fleet[p1ShipsPlaced]) {
+        // Check for overflow
+        console.log(e.target.classList[1]);
+        console.log(p1Fleet[p1ShipsPlaced].length);
+        console.log(p1Fleet[p1ShipsPlaced].orientation);
+  
+        console.log(
+          checkOverflow(
+            e.target.classList[1],
+            p1Fleet[p1ShipsPlaced].length,
+            p1Fleet[p1ShipsPlaced].orientation
+          )
+        );
+        if (
+          checkOverflow(
+            e.target.classList[1],
+            p1Fleet[p1ShipsPlaced].length,
+            p1Fleet[p1ShipsPlaced].orientation
+          )
+        ) {
+          // Add ship's grids to the ship in the fleet
+          p1Fleet[p1ShipsPlaced].placeShip(e.target.classList[1]);
+
+          // For each ship's grid, mark as hasShip on board
+          p1Fleet[p1ShipsPlaced].grids.forEach((grid) => {
+            let square = p1Board[grid.coord];
+            square.hasShip = true;
+            let board = p1Board;
+            board[grid.coord] = square;
+            setP1Board(board);
+          });
+
+          // Increase Counters
+          setP1ShipsPlaced(p1ShipsPlaced + 1);
+          setCounter({
+            player1: counter.player1 + 1,
+            player2: counter.player2,
+          });
+        }
+      }
+    } else {
+      // Same, but for player 2
+      if (p2Fleet[p2ShipsPlaced]) {
+        p2Fleet[p2ShipsPlaced].placeShip(e.target.classList[1]);
+
+        p2Fleet[p2ShipsPlaced].grids.forEach((grid) => {
+          let square = p2Board[grid.coord];
+          square.hasShip = true;
+          let board = p2Board;
+          board[grid.coord] = square;
+          setP2Board(board);
+        });
+
+        setP1ShipsPlaced(p2ShipsPlaced + 1);
+        // p2ShipsPlaced += 1;
+        setCounter({
+          player1: counter.player1,
+          player2: counter.player2 + 1,
+        });
+      }
+    }
+  };
+
+  // const checkCollision = function (grid, length, dir) {
+  //   let counter = 0;
+  //   for (let i = 0; i < length; i++) {
+  //     if (dir === "Horizontal") {
+  //       if (!p1.board.board[grid - 1 + i].hasShip) {
+  //         counter += 1;
+  //       }
+  //     }
+  //     if (dir === "Vertical") {
+  //       if (!p1.board.board[grid - 1 + i * 10].hasShip) {
+  //         counter += 1;
+  //       }
+  //     }
+  //   }
+  //   if (counter === length) {
+  //     return true;
+  //   }
+  // };
 
   // useEffect(() => {
   //   console.log(p1Fleet);
