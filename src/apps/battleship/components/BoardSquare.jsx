@@ -32,7 +32,6 @@ function BoardSquare(props) {
       <div
         className={squareClass}
         id={square.index}
-        
         onClick={(e) => {
           handlePlaceShip(e);
         }}
@@ -42,9 +41,7 @@ function BoardSquare(props) {
         onMouseLeave={(e) => {
           handleHoverOut(e);
         }}
-      >
-        {square.index}
-      </div>
+      ></div>
     </>
   );
 }
