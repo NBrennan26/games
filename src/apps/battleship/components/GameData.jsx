@@ -6,7 +6,6 @@ function GameData(props) {
     p2Board,
     counter,
     p1ShipsPlaced,
-    p2ShipsPlaced
   } = props;
 
   return (

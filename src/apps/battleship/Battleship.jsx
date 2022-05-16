@@ -16,7 +16,6 @@ function Battleship() {
   const [p2Board, setP2Board] = useState([]);
   const [counter, setCounter] = useState({ player1: 0, player2: 0 });
   const [p1ShipsPlaced, setP1ShipsPlaced] = useState(0);
-  const [p2ShipsPlaced, setP2ShipsPlaced] = useState(0);
 
   // Create ships and add them to player fleets
   useEffect(() => {
@@ -86,25 +85,6 @@ function Battleship() {
             player2: counter.player2,
           });
         }
-      }
-    } else {
-      // Same, but for player 2
-      if (p2Fleet[p2ShipsPlaced]) {
-        p2Fleet[p2ShipsPlaced].placeShip(e.target.classList[1]);
-
-        p2Fleet[p2ShipsPlaced].grids.forEach((grid) => {
-          let square = p2Board[grid.coord];
-          square.hasShip = true;
-          let board = p2Board;
-          board[grid.coord] = square;
-          setP2Board(board);
-        });
-
-        setP2ShipsPlaced(p2ShipsPlaced + 1);
-        setCounter({
-          player1: counter.player1,
-          player2: counter.player2 + 1,
-        });
       }
     }
   };
@@ -267,7 +247,6 @@ function Battleship() {
           p2Board={p2Board}
           counter={counter}
           p1ShipsPlaced={p1ShipsPlaced}
-          p2ShipsPlaced={p2ShipsPlaced}
         />
       </div>
     </div>
