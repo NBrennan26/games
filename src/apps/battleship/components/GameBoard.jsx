@@ -6,15 +6,17 @@ function GameBoard(props) {
     setP1Board,
     p2Board,
     setP2Board,
+    p1ShipsPlaced,
     handlePlaceShip,
     handleHoverIn,
     handleHoverOut,
+    handleRotate,
     counter,
   } = props;
 
   return (
-    <>
-      <div className="bs-board">
+    <div className="bs-board">
+      <div className="bs-boards-cont">
         <PlayerBoard
           playerBoard={p1Board}
           setPlayerBoard={setP1Board}
@@ -34,7 +36,14 @@ function GameBoard(props) {
           counter={counter}
         />
       </div>
-    </>
+      {p1ShipsPlaced < 5 ? (
+        <button className="bs-rotate-btn" onClick={() => handleRotate()}>
+          Rotate Ship
+        </button>
+      ) : (
+        <></>
+      )}
+    </div>
   );
 }
 

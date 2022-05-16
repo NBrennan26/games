@@ -157,10 +157,25 @@ function Battleship() {
           let gridNo = parseInt(e.target.classList[1]);
           for (let i = 0; i < p1Fleet[p1ShipsPlaced].length; i++) {
             let tgtGrid = document.getElementById(gridNo + i * 10);
-            tgtGrid.classList.remove("shadow");
+            if (tgtGrid) {
+              tgtGrid.classList.remove("shadow");
+            }
           }
         }
       }
+    }
+  };
+
+  const handleRotate = () => {
+    if (p1ShipsPlaced < 5) {
+      let ship = p1Fleet[p1ShipsPlaced];
+      if (ship.orientation === "Horizontal") {
+        ship.orientation = "Vertical";
+      } else if (ship.orientation === "Vertical") {
+        ship.orientation = "Horizontal";
+      }
+      console.log(ship);
+      console.log(p1Board)
     }
   };
 
@@ -182,9 +197,11 @@ function Battleship() {
           setP1Board={setP1Board}
           p2Board={p2Board}
           setP2Board={setP2Board}
+          p1ShipsPlaced= {p1ShipsPlaced}
           handlePlaceShip={handlePlaceShip}
           handleHoverIn={handleHoverIn}
           handleHoverOut={handleHoverOut}
+          handleRotate={handleRotate}
           counter={counter}
         />
         <GameData
