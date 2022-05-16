@@ -4,6 +4,7 @@ import GameData from "./components/GameData";
 import buildShip from "./features/scripts/buildship";
 import checkOverflow from "./features/scripts/checkOverflow";
 import checkCollision from "./features/scripts/checkCollision";
+import random100 from "./features/scripts/random100";
 import "./bs.css";
 
 function Battleship() {
@@ -44,7 +45,6 @@ function Battleship() {
     // Check which board was clicked
     if (e.target.parentElement.classList[1] === "player1-board") {
       // Check if there are still ships to place (0-4)
-
       if (p1Fleet[p1ShipsPlaced]) {
         // Check for overflow && collision with already placed ship
         if (
@@ -71,6 +71,13 @@ function Battleship() {
             board[grid.coord] = square;
             setP1Board(board);
           });
+
+          // Trigger p2 ship placement
+          if (p1ShipsPlaced === 0) {
+            for (let i = 0; i < 5; i++) {
+              checkP2Ship(i);
+            }
+          }
 
           // Increase Counters
           setP1ShipsPlaced(p1ShipsPlaced + 1);
@@ -174,17 +181,66 @@ function Battleship() {
       } else if (ship.orientation === "Vertical") {
         ship.orientation = "Horizontal";
       }
-      console.log(ship);
-      console.log(p1Board)
     }
   };
 
-  // useEffect(() => {
-  //   console.log(p1Fleet);
-  //   console.log(p1Board);
-  //   console.log(p2Fleet);
-  //   console.log(p2Board);
-  // }, [p1Board, p2Board, p1Fleet, p2Fleet]);
+  const checkP2Ship = (shipNo) => {
+    // Get Ship and update Orientation randomly
+    let ship = p2Fleet[shipNo];
+    let randomNo = Math.random();
+    if (randomNo < 0.5) {
+      ship.orientation = "Vertical";
+      setP2Fleet([...p2Fleet, (p2Fleet[shipNo] = ship)]);
+    }
+
+    // Get random grid and check for overflow/overlap
+    let gridNo = random100();
+    if (
+      checkOverflow(
+        gridNo,
+        p2Fleet[shipNo].length,
+        p2Fleet[shipNo].orientation
+      ) &&
+      checkCollision(
+        gridNo,
+        p2Fleet[shipNo].length,
+        p2Fleet[shipNo].orientation,
+        p2Board
+      )
+    ) {
+      // No Overflow/Overlap, so continue to place
+      placeP2Ship(shipNo, gridNo);
+    } else if (
+      !checkOverflow(
+        gridNo,
+        p2Fleet[shipNo].length,
+        p2Fleet[shipNo].orientation
+      ) ||
+      !checkCollision(
+        gridNo,
+        p2Fleet[shipNo].length,
+        p2Fleet[shipNo].orientation,
+        p2Board
+      )
+    ) {
+      // Overflow/Overlap occurs, get new values
+      checkP2Ship(shipNo);
+    }
+  };
+
+  const placeP2Ship = (shipNo, gridNo) => {
+    // Add ship's grids to the ship in the fleet
+    p2Fleet[shipNo].placeShip(gridNo);
+
+    // For each ship's grid, mark as hasShip on board
+    p2Fleet[shipNo].grids.forEach((grid) => {
+      let square = p2Board[grid.coord];
+      square.hasShip = true;
+      let board = p2Board;
+      board[grid.coord] = square;
+      setP2Board(board);
+    });
+  };
 
   return (
     <div className="battleship-cont">
@@ -197,7 +253,7 @@ function Battleship() {
           setP1Board={setP1Board}
           p2Board={p2Board}
           setP2Board={setP2Board}
-          p1ShipsPlaced= {p1ShipsPlaced}
+          p1ShipsPlaced={p1ShipsPlaced}
           handlePlaceShip={handlePlaceShip}
           handleHoverIn={handleHoverIn}
           handleHoverOut={handleHoverOut}

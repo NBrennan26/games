@@ -33,19 +33,19 @@ const checkOverflow = function (grid, length, dir) {
       return true;
     } else return false;
   } else if (length === 5 && dir === "Vertical") {
-    if (gridNo <= 60) {
+    if (gridNo < 60) {
       return true;
     } else return false;
   } else if (length === 4 && dir === "Vertical") {
-    if (gridNo <= 70) {
+    if (gridNo < 70) {
       return true;
     } else return false;
   } else if (length === 3 && dir === "Vertical") {
-    if (gridNo <= 80) {
+    if (gridNo < 80) {
       return true;
     } else return false;
   } else if (length === 2 && dir === "Vertical") {
-    if (gridNo <= 90) {
+    if (gridNo < 90) {
       return true;
     } else return false;
   } else {

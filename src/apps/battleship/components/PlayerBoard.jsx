@@ -30,13 +30,6 @@ function PlayerBoard(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // useEffect(() => {
-  //   console.log(playerBoard);
-  //   let curBoardArr = playerBoard;
-  //   console.log("curBoardArr", curBoardArr);
-  //   setBoardArr(curBoardArr);
-  // }, [playerBoard, props, counter]);
-
   return (
     <>
       <div className={`bs-player-board ${player}-board`}>

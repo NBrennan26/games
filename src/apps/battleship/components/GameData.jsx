@@ -37,7 +37,7 @@ function GameData(props) {
           ) : (
             <div className="p1-ship-status"></div>
           )}
-          {p2ShipsPlaced === 5 ? (
+          {p1ShipsPlaced === 5 ? (
             <div className="p2-ship-status">
               <span>Carrier Status: {p2Fleet[0].status}</span>
               <span>Battleship Status: {p2Fleet[1].status}</span>
