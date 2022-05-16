@@ -93,8 +93,7 @@ function Battleship() {
           setP2Board(board);
         });
 
-        setP1ShipsPlaced(p2ShipsPlaced + 1);
-        // p2ShipsPlaced += 1;
+        setP2ShipsPlaced(p2ShipsPlaced + 1);
         setCounter({
           player1: counter.player1,
           player2: counter.player2 + 1,
@@ -124,7 +123,15 @@ function Battleship() {
           handlePlaceShip={handlePlaceShip}
           counter={counter}
         />
-        <GameData />
+        <GameData
+          p1Fleet={p1Fleet}
+          p2Fleet={p2Fleet}
+          p1Board={p1Board}
+          p2Board={p2Board}
+          counter={counter}
+          p1ShipsPlaced={p1ShipsPlaced}
+          p2ShipsPlaced={p2ShipsPlaced}
+        />
       </div>
     </div>
   );
