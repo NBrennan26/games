@@ -16,6 +16,7 @@ function Battleship() {
   const [p2Board, setP2Board] = useState([]);
   const [counter, setCounter] = useState({ player1: 0, player2: 0 });
   const [p1ShipsPlaced, setP1ShipsPlaced] = useState(0);
+  const [player1Turn, setPlayer1Turn] = useState(false)
 
   // Create ships and add them to player fleets
   useEffect(() => {
@@ -40,6 +41,7 @@ function Battleship() {
     setP2Fleet(p2Ships);
   }, []);
 
+  // Place player 1 ships from click
   const handlePlaceShip = (e) => {
     // Check which board was clicked
     if (e.target.parentElement.classList[1] === "player1-board") {
@@ -89,6 +91,7 @@ function Battleship() {
     }
   };
 
+  // Show placement preview on hover ovre player 1 board
   const handleHoverIn = (e) => {
     if (
       e.target.parentElement.classList[1] === "player1-board" &&
@@ -126,6 +129,7 @@ function Battleship() {
     }
   };
 
+  // Remove placement preview when mouse leaves the square
   const handleHoverOut = (e) => {
     if (
       e.target.parentElement.classList[1] === "player1-board" &&
@@ -153,6 +157,7 @@ function Battleship() {
     }
   };
 
+  // Rotate ship
   const handleRotate = () => {
     if (p1ShipsPlaced < 5) {
       let ship = p1Fleet[p1ShipsPlaced];
@@ -164,6 +169,7 @@ function Battleship() {
     }
   };
 
+  // Find a safe grid on player 2 board to place ship, trigger placeP2Ship
   const checkP2Ship = (shipNo) => {
     // Get Ship and update Orientation randomly
     let ship = p2Fleet[shipNo];
@@ -208,6 +214,7 @@ function Battleship() {
     }
   };
 
+  // Place player 2 ship and update board
   const placeP2Ship = (shipNo, gridNo) => {
     // Add ship's grids to the ship in the fleet
     p2Fleet[shipNo].placeShip(gridNo);
@@ -221,6 +228,16 @@ function Battleship() {
       setP2Board(board);
     });
   };
+
+  const handlePlayerAttack = (e) => {
+    if (p1ShipsPlaced === 5) {
+      console.log(e.target)
+    }
+  }
+
+  const handleAiAttack = () => {
+    let tgtGrid = random100()
+  }
 
   return (
     <div className="battleship-cont">
@@ -238,6 +255,7 @@ function Battleship() {
           handleHoverIn={handleHoverIn}
           handleHoverOut={handleHoverOut}
           handleRotate={handleRotate}
+          handlePlayerAttack={handlePlayerAttack}
           counter={counter}
         />
         <GameData

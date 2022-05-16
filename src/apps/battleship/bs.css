@@ -45,6 +45,9 @@
   grid-template-rows: repeat(10, 1fr);
   margin: 0 10px;
 }
+.player2-board:hover {
+  cursor: crosshair;
+}
 .bs-board-square {
   display: flex;
   justify-content: center;

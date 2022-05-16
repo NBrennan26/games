@@ -8,6 +8,7 @@ function PlayerBoard(props) {
     handlePlaceShip,
     handleHoverIn,
     handleHoverOut,
+    handlePlayerAttack,
     player,
     counter,
   } = props;
@@ -41,6 +42,7 @@ function PlayerBoard(props) {
               handlePlaceShip={handlePlaceShip}
               handleHoverIn={handleHoverIn}
               handleHoverOut={handleHoverOut}
+              handlePlayerAttack={handlePlayerAttack}
               player={player}
               counter={counter}
             />

@@ -6,6 +6,7 @@ function BoardSquare(props) {
     handlePlaceShip,
     handleHoverIn,
     handleHoverOut,
+    handlePlayerAttack,
     player,
     counter,
   } = props;
@@ -25,7 +26,7 @@ function BoardSquare(props) {
         setSquareClass(squareClass + " ship");
       }
     }
-  }, [square, squareClass, props, counter]);
+  }, [player, square, squareClass, props, counter]);
 
   return (
     <>
@@ -33,7 +34,11 @@ function BoardSquare(props) {
         className={squareClass}
         id={square.index}
         onClick={(e) => {
-          handlePlaceShip(e);
+          if (player === "player1") {
+            handlePlaceShip(e);
+          } else {
+            handlePlayerAttack(e);
+          }
         }}
         onMouseEnter={(e) => {
           handleHoverIn(e);
