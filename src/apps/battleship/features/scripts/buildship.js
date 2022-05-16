@@ -14,7 +14,7 @@ const buildShip = function (name, length, player) {
     placeShip(grid) {
       let gridNo = parseInt(grid);
       let shipArr = [];
-      if (length === 5 && this.orientation === "Horizontal") {
+      if (this.orientation === "Horizontal") {
         //Place the Ship
         for (let i = 0; i < length; i++) {
           this.grids[i] = {
@@ -24,67 +24,7 @@ const buildShip = function (name, length, player) {
           shipArr.push(gridNo + i);
         }
       }
-      if (length === 5 && this.orientation === "Vertical") {
-        //Place the Ship
-        for (let i = 0; i < length; i++) {
-          this.grids[i] = {
-            coord: gridNo + i * 10,
-            hit: false,
-          };
-          shipArr.push(gridNo + i * 10);
-        }
-      }
-      if (length === 4 && this.orientation === "Horizontal") {
-        //Place the Ship
-        for (let i = 0; i < length; i++) {
-          this.grids[i] = {
-            coord: gridNo + i,
-            hit: false,
-          };
-          shipArr.push(gridNo + i);
-        }
-      }
-      if (length === 4 && this.orientation === "Vertical") {
-        //Place the Ship
-        for (let i = 0; i < length; i++) {
-          this.grids[i] = {
-            coord: gridNo + i * 10,
-            hit: false,
-          };
-          shipArr.push(gridNo + i * 10);
-        }
-      }
-      if (length === 3 && this.orientation === "Horizontal") {
-        //Place the Ship
-        for (let i = 0; i < length; i++) {
-          this.grids[i] = {
-            coord: gridNo + i,
-            hit: false,
-          };
-          shipArr.push(gridNo + i);
-        }
-      }
-      if (length === 3 && this.orientation === "Vertical") {
-        //Place the Ship
-        for (let i = 0; i < length; i++) {
-          this.grids[i] = {
-            coord: gridNo + i * 10,
-            hit: false,
-          };
-          shipArr.push(gridNo + i * 10);
-        }
-      }
-      if (length === 2 && this.orientation === "Horizontal") {
-        //Place the Ship
-        for (let i = 0; i < length; i++) {
-          this.grids[i] = {
-            coord: gridNo + i,
-            hit: false,
-          };
-          shipArr.push(gridNo + i);
-        }
-      }
-      if (length === 2 && this.orientation === "Vertical") {
+      if (this.orientation === "Vertical") {
         //Place the Ship
         for (let i = 0; i < length; i++) {
           this.grids[i] = {

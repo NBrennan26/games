@@ -2,8 +2,15 @@ import { useEffect, useState } from "react";
 import BoardSquare from "./BoardSquare";
 
 function PlayerBoard(props) {
-  const { playerBoard, setPlayerBoard, handlePlaceShip, player, counter } =
-    props;
+  const {
+    playerBoard,
+    setPlayerBoard,
+    handlePlaceShip,
+    handleHoverIn,
+    handleHoverOut,
+    player,
+    counter,
+  } = props;
 
   const [boardArr, setBoardArr] = useState([]);
 
@@ -39,6 +46,8 @@ function PlayerBoard(props) {
               square={square}
               key={square.index}
               handlePlaceShip={handlePlaceShip}
+              handleHoverIn={handleHoverIn}
+              handleHoverOut={handleHoverOut}
               player={player}
               counter={counter}
             />

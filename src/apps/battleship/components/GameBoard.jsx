@@ -1,8 +1,16 @@
 import PlayerBoard from "./PlayerBoard";
 
 function GameBoard(props) {
-  const { p1Board, setP1Board, p2Board, setP2Board, handlePlaceShip, counter } =
-    props;
+  const {
+    p1Board,
+    setP1Board,
+    p2Board,
+    setP2Board,
+    handlePlaceShip,
+    handleHoverIn,
+    handleHoverOut,
+    counter,
+  } = props;
 
   return (
     <>
@@ -11,6 +19,8 @@ function GameBoard(props) {
           playerBoard={p1Board}
           setPlayerBoard={setP1Board}
           handlePlaceShip={handlePlaceShip}
+          handleHoverIn={handleHoverIn}
+          handleHoverOut={handleHoverOut}
           player="player1"
           counter={counter}
         />
@@ -18,6 +28,8 @@ function GameBoard(props) {
           playerBoard={p2Board}
           setPlayerBoard={setP2Board}
           handlePlaceShip={handlePlaceShip}
+          handleHoverIn={handleHoverIn}
+          handleHoverOut={handleHoverOut}
           player="player2"
           counter={counter}
         />

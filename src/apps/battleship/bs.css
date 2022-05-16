@@ -49,6 +49,9 @@
 .ship {
   background-color: red;
 }
+.shadow {
+  background-color: yellow;
+}
 /*************/
 /* Game Data */
 /*************/

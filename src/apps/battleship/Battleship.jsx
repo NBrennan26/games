@@ -102,6 +102,68 @@ function Battleship() {
     }
   };
 
+  const handleHoverIn = (e) => {
+    if (
+      e.target.parentElement.classList[1] === "player1-board" &&
+      p1ShipsPlaced < 5
+    ) {
+      if (p1Fleet[p1ShipsPlaced]) {
+        if (
+          checkOverflow(
+            e.target.classList[1],
+            p1Fleet[p1ShipsPlaced].length,
+            p1Fleet[p1ShipsPlaced].orientation
+          ) &&
+          checkCollision(
+            e.target.classList[1],
+            p1Fleet[p1ShipsPlaced].length,
+            p1Fleet[p1ShipsPlaced].orientation,
+            p1Board
+          )
+        ) {
+          if (p1Fleet[p1ShipsPlaced].orientation === "Horizontal") {
+            let gridNo = parseInt(e.target.classList[1]);
+            for (let i = 0; i < p1Fleet[p1ShipsPlaced].length; i++) {
+              let tgtGrid = document.getElementById(gridNo + i);
+              tgtGrid.classList.add("shadow");
+            }
+          } else {
+            let gridNo = parseInt(e.target.classList[1]);
+            for (let i = 0; i < p1Fleet[p1ShipsPlaced].length; i++) {
+              let tgtGrid = document.getElementById(gridNo + i * 10);
+              tgtGrid.classList.add("shadow");
+            }
+          }
+        }
+      }
+    }
+  };
+
+  const handleHoverOut = (e) => {
+    if (
+      e.target.parentElement.classList[1] === "player1-board" &&
+      p1ShipsPlaced < 5
+    ) {
+      if (p1Fleet[p1ShipsPlaced]) {
+        if (p1Fleet[p1ShipsPlaced].orientation === "Horizontal") {
+          let gridNo = parseInt(e.target.classList[1]);
+          for (let i = 0; i < p1Fleet[p1ShipsPlaced].length; i++) {
+            let tgtGrid = document.getElementById(gridNo + i);
+            if (tgtGrid) {
+              tgtGrid.classList.remove("shadow");
+            }
+          }
+        } else {
+          let gridNo = parseInt(e.target.classList[1]);
+          for (let i = 0; i < p1Fleet[p1ShipsPlaced].length; i++) {
+            let tgtGrid = document.getElementById(gridNo + i * 10);
+            tgtGrid.classList.remove("shadow");
+          }
+        }
+      }
+    }
+  };
+
   // useEffect(() => {
   //   console.log(p1Fleet);
   //   console.log(p1Board);
@@ -121,6 +183,8 @@ function Battleship() {
           p2Board={p2Board}
           setP2Board={setP2Board}
           handlePlaceShip={handlePlaceShip}
+          handleHoverIn={handleHoverIn}
+          handleHoverOut={handleHoverOut}
           counter={counter}
         />
         <GameData

@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
 
 function BoardSquare(props) {
-  const { square, handlePlaceShip, player, counter } = props;
+  const {
+    square,
+    handlePlaceShip,
+    handleHoverIn,
+    handleHoverOut,
+    player,
+    counter,
+  } = props;
 
   const [squareClass, setSquareClass] = useState(
     `bs-board-square ${square.index}`
@@ -24,8 +31,16 @@ function BoardSquare(props) {
     <>
       <div
         className={squareClass}
+        id={square.index}
+        
         onClick={(e) => {
           handlePlaceShip(e);
+        }}
+        onMouseEnter={(e) => {
+          handleHoverIn(e);
+        }}
+        onMouseLeave={(e) => {
+          handleHoverOut(e);
         }}
       >
         {square.index}
