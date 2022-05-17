@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import GameBoard from "./components/GameBoard";
 import GameData from "./components/GameData";
+import GameOver from "./components/GameOver";
 import buildShip from "./features/scripts/buildship";
 import checkOverflow from "./features/scripts/checkOverflow";
 import checkCollision from "./features/scripts/checkCollision";
 import random100 from "./features/scripts/random100";
 import assignOrientation from "./features/scripts/assignOrientation";
-import checkSunk from "./features/scripts/checkSunk";
 import "./bs.css";
 
 function Battleship() {
@@ -346,14 +346,58 @@ function Battleship() {
         p2Sunk += 1;
       }
     });
-    if (p1Sunk === 5) {
+    if (p2Sunk === 5) {
       setGameWinner("player1");
       setGameOver(true);
-    } else if (p2Sunk === 5) {
+    } else if (p1Sunk === 5) {
       setGameWinner("player2");
       setGameOver(true);
     }
   }, [p1Fleet, p2Fleet, counter]);
+
+  const handleReset = () => {
+    let p1TempFleet = p1Fleet;
+    let p2TempFleet = p2Fleet;
+    let p1TempBoard = p1Board;
+    let p2TempBoard = p2Board;
+
+    p1TempFleet.forEach((ship) => {
+      ship.grids = [];
+      ship.isSunk = false;
+      ship.orientation = "Horizontal";
+      ship.status = "Okay";
+    });
+    p2TempFleet.forEach((ship) => {
+      ship.grids = [];
+      ship.isSunk = false;
+      ship.orientation = assignOrientation(2);
+      ship.status = "Unknown";
+    });
+    p1TempBoard.forEach((square) => {
+      square.hasShip = false;
+      square.isShot = false;
+      square.isHit = false;
+      square.isMiss = false;
+    });
+    p2TempBoard.forEach((square) => {
+      square.hasShip = false;
+      square.isShot = false;
+      square.isHit = false;
+      square.isMiss = false;
+    });
+
+    setP1Fleet(p1TempFleet);
+    setP2Fleet(p2TempFleet);
+    setP1Board(p1TempBoard);
+    setP2Board(p2TempBoard);
+
+    setCounter({ player1: 0, player2: 0 });
+    setP1ShipsPlaced(0);
+    setPlayer1Turn(true);
+    setP2ShotSquares([]);
+    setGameOver(false);
+    setGameWinner(null);
+  };
 
   return (
     <div className="battleship-cont">
@@ -385,7 +429,7 @@ function Battleship() {
           />
         </div>
       ) : (
-        <></>
+        <GameOver gameWinner={gameWinner} handleReset={handleReset} />
       )}
     </div>
   );

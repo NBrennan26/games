@@ -39,7 +39,7 @@ function GameBoard(props) {
         />
       </div>
       {p1ShipsPlaced < 5 ? (
-        <button className="bs-rotate-btn" onClick={() => handleRotate()}>
+        <button className="bs-rotate-btn bs-btn" onClick={() => handleRotate()}>
           Rotate Ship
         </button>
       ) : (

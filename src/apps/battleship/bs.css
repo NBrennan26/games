@@ -29,6 +29,18 @@
 .bs-data {
   height: 20vh;
 }
+.bs-btn {
+  margin-top: 12px;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 2px;
+  font-family: "Righteous", cursive;
+  transition: 0.1s;
+}
+.bs-btn:hover {
+  transform: scale(1.1);
+}
+
 /*****************/
 /* Player Boards */
 /*****************/
@@ -67,15 +79,8 @@
   background-color: yellow;
 }
 .bs-rotate-btn {
-  margin-top: 12px;
-  border: 2px solid black;
-  border-radius: 10px;
-  padding: 2px;
-  font-family: "Righteous", cursive;
-  transition: 0.1s;
 }
 .bs-rotate-btn:hover {
-  transform: scale(1.1);
 }
 /*************/
 /* Game Data */
@@ -88,4 +93,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+/*************/
+/* Game Over */
+/*************/
+.bs-game-over-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20vh;
+}
+.bs-game-over-mess {
+  font-size: 175%;
+  margin-bottom: 5vh;
+}
+.bs-reset-btn {
+}
+.bs-reset-btn.hover {
 }
