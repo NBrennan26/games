@@ -164,12 +164,6 @@ function Battleship() {
   const handleRotate = () => {
     if (p1ShipsPlaced < 5) {
       p1Fleet[p1ShipsPlaced].rotateShip();
-      // let ship = p1Fleet[p1ShipsPlaced];
-      // if (ship.orientation === "Horizontal") {
-      //   ship.orientation = "Vertical";
-      // } else if (ship.orientation === "Vertical") {
-      //   ship.orientation = "Horizontal";
-      // }
     }
   };
 
@@ -228,45 +222,47 @@ function Battleship() {
   const handlePlayerAttack = (e) => {
     if (p1ShipsPlaced === 5) {
       let tgtGrid = p2Board[e.target.classList[1]].index;
-      console.log(p2Board);
+      let fleet = p2Fleet
+      let board = p2Board
+      let grid = board[tgtGrid]
+      console.log(board);
+      console.log(grid)
       // Check if ship is present at target grid
       if (p2Board[tgtGrid].hasShip) {
         // Ship Present - Process Hit
-        // Find ship in p2Fleet && Update grid
-        p2Fleet.forEach((ship) => {
+        fleet.forEach((ship) => {
           if (ship.gridArr.indexOf(tgtGrid) > -1) {
             
             ship.receiveHit(tgtGrid)
             console.log(ship)
 
             ship.updateStatus()
-            console.log(p2Fleet)
+            console.log(fleet)
 
-            /*
+
             
-            let shipIndex = p2Fleet.indexOf(ship);
-            let gridIndex = ship.gridArr.indexOf(tgtGrid);
-            let tgtShip = ship;
-            let tempFleet = p2Fleet;
-            tgtShip.grids[gridIndex].hit = true;
-
-            // Check if ship is sunk and update if so
-            if (checkSunk(tgtShip.length, tgtShip.grids)) {
-              tgtShip.isSunk = true;
-              tgtShip.status = "Sunk";
-              console.log("sunk", tgtShip);
-            }
-
-            tempFleet[shipIndex] = tgtShip;
-            setP2Fleet(tempFleet);
-
-            */
-
           }
         });
+        // Update p2Fleet state
+        setP2Fleet(fleet)
+        console.log(p2Fleet)
+        // console.log(p1Fleet)
+
+        // Update board with Hit
+        board[tgtGrid].isShot = true
+        board[tgtGrid].isHit = true
+        setP2Board(board)
       } else {
+        // Update board with Miss
+        board[tgtGrid].isShot = true
+        board[tgtGrid].isMiss = true
+        setP2Board(board)
       }
     }
+    setCounter({
+      player1: counter.player1 + 1,
+      player2: counter.player2,
+    });
   };
 
   const handleAiAttack = () => {

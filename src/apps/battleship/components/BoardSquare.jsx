@@ -25,6 +25,12 @@ function BoardSquare(props) {
       } else if (square.hasShip && !squareClass.includes("ship")) {
         setSquareClass(squareClass + " ship");
       }
+    } else {
+      if (square.isHit && !squareClass.includes("hit")) {
+        setSquareClass(squareClass + " hit");
+      } else if (square.isMiss && !squareClass.includes("miss")) {
+        setSquareClass(squareClass + " miss");
+      }
     }
   }, [player, square, squareClass, props, counter]);
 

@@ -60,6 +60,12 @@
 .shadow {
   background-color: purple;
 }
+.miss {
+  background-color: brown;
+}
+.hit {
+  background-color: yellow;
+}
 .bs-rotate-btn {
   margin-top: 12px;
   border: 2px solid black;
