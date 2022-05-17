@@ -8,8 +8,6 @@ const buildShip = function (name, length, player, orientation) {
     orientation: orientation,
     status: "Okay",
 
-    // grid {coord: Num, hit: false}
-
     // Place Ship (checks against edge of board)
     placeShip(grid) {
       let gridNo = parseInt(grid);

@@ -1,5 +1,5 @@
 const checkOverflow = function (grid, length, dir) {
-  let gridNo = parseInt(grid)
+  let gridNo = parseInt(grid);
   if (length === 5 && dir === "Horizontal") {
     if (
       ![

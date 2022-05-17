@@ -3,7 +3,6 @@ import BoardSquare from "./BoardSquare";
 
 function PlayerBoard(props) {
   const {
-    playerBoard,
     setPlayerBoard,
     handlePlaceShip,
     handleHoverIn,

@@ -94,6 +94,12 @@
   flex-direction: column;
   align-items: center;
 }
+.bs-damaged-span {
+  color: yellow;
+}
+.bs-sunk-span {
+  color: red;
+}
 /*************/
 /* Game Over */
 /*************/

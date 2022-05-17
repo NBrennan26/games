@@ -2,9 +2,7 @@ import PlayerBoard from "./PlayerBoard";
 
 function GameBoard(props) {
   const {
-    p1Board,
     setP1Board,
-    p2Board,
     setP2Board,
     p1ShipsPlaced,
     handlePlaceShip,
@@ -19,7 +17,6 @@ function GameBoard(props) {
     <div className="bs-board">
       <div className="bs-boards-cont">
         <PlayerBoard
-          playerBoard={p1Board}
           setPlayerBoard={setP1Board}
           handlePlaceShip={handlePlaceShip}
           handleHoverIn={handleHoverIn}
@@ -28,7 +25,6 @@ function GameBoard(props) {
           counter={counter}
         />
         <PlayerBoard
-          playerBoard={p2Board}
           setPlayerBoard={setP2Board}
           handlePlaceShip={handlePlaceShip}
           handleHoverIn={handleHoverIn}

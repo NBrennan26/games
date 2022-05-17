@@ -10,8 +10,6 @@ import assignOrientation from "./features/scripts/assignOrientation";
 import "./bs.css";
 
 function Battleship() {
-  // const [player1, setPlayer1] = useState({});
-  // const [player2, setPlayer2] = useState({});
   const [p1Fleet, setP1Fleet] = useState([]);
   const [p2Fleet, setP2Fleet] = useState([]);
   const [p1Board, setP1Board] = useState([]);
@@ -46,6 +44,7 @@ function Battleship() {
     setP2Fleet(p2Ships);
   }, []);
 
+  // Update P1 Fleet Status
   useEffect(() => {
     if (p1Fleet.length === 5) {
       setPlayer1Turn(true);
@@ -57,6 +56,7 @@ function Battleship() {
     }
   }, [p1Fleet]);
 
+  // Update P2 Fleet Status
   useEffect(() => {
     if (p2Fleet.length === 5) {
       p2Fleet[0].updateStatus();
@@ -115,10 +115,9 @@ function Battleship() {
         }
       }
     }
-    console.log(p2Fleet);
   };
 
-  // Show placement preview on hover ovre player 1 board
+  // Show placement preview on hover over player 1 board
   const handleHoverIn = (e) => {
     if (
       e.target.parentElement.classList[1] === "player1-board" &&
@@ -243,30 +242,23 @@ function Battleship() {
     });
   };
 
+  // Handle Player 1's attack click (and trigger computer attack)
   const handlePlayerAttack = (e) => {
     if (p1ShipsPlaced === 5 && player1Turn && !gameOver) {
       let tgtGrid = p2Board[e.target.classList[1]].index;
       let fleet = p2Fleet;
       let board = p2Board;
-      let grid = board[tgtGrid];
-      console.log(board);
-      console.log(grid);
       // Check if ship is present at target grid
       if (p2Board[tgtGrid].hasShip) {
         // Ship Present - Process Hit
         fleet.forEach((ship) => {
           if (ship.gridArr.indexOf(tgtGrid) > -1) {
             ship.receiveHit(tgtGrid);
-            console.log(ship);
-
             ship.updateStatus();
-            console.log(fleet);
           }
         });
         // Update p2Fleet state
         setP2Fleet(fleet);
-        console.log(p2Fleet);
-        // console.log(p1Fleet)
 
         // Update board with Hit
         board[tgtGrid].isShot = true;
@@ -287,6 +279,7 @@ function Battleship() {
     }
   };
 
+  // Handle Computer's Attack
   const handleAiAttack = () => {
     let tgtGrid = random100();
     let fleet = p1Fleet;
@@ -299,16 +292,11 @@ function Battleship() {
         fleet.forEach((ship) => {
           if (ship.gridArr.indexOf(tgtGrid) > -1) {
             ship.receiveHit(tgtGrid);
-            console.log(ship);
-
             ship.updateStatus();
-            console.log(fleet);
           }
         });
         // Update p2Fleet state
         setP1Fleet(fleet);
-        console.log(p1Fleet);
-        // console.log(p1Fleet)
 
         // Update board with Hit
         board[tgtGrid].isShot = true;
@@ -355,6 +343,7 @@ function Battleship() {
     }
   }, [p1Fleet, p2Fleet, counter]);
 
+  // Reset Game Data
   const handleReset = () => {
     let p1TempFleet = p1Fleet;
     let p2TempFleet = p2Fleet;
@@ -390,7 +379,6 @@ function Battleship() {
     setP2Fleet(p2TempFleet);
     setP1Board(p1TempBoard);
     setP2Board(p2TempBoard);
-
     setCounter({ player1: 0, player2: 0 });
     setP1ShipsPlaced(0);
     setPlayer1Turn(true);
@@ -407,9 +395,7 @@ function Battleship() {
       {!gameWinner ? (
         <div className="bs-board-cont">
           <GameBoard
-            p1Board={p1Board}
             setP1Board={setP1Board}
-            p2Board={p2Board}
             setP2Board={setP2Board}
             p1ShipsPlaced={p1ShipsPlaced}
             handlePlaceShip={handlePlaceShip}
@@ -422,9 +408,6 @@ function Battleship() {
           <GameData
             p1Fleet={p1Fleet}
             p2Fleet={p2Fleet}
-            p1Board={p1Board}
-            p2Board={p2Board}
-            counter={counter}
             p1ShipsPlaced={p1ShipsPlaced}
           />
         </div>
