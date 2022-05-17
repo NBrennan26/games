@@ -163,25 +163,18 @@ function Battleship() {
   // Rotate ship
   const handleRotate = () => {
     if (p1ShipsPlaced < 5) {
-      let ship = p1Fleet[p1ShipsPlaced];
-      if (ship.orientation === "Horizontal") {
-        ship.orientation = "Vertical";
-      } else if (ship.orientation === "Vertical") {
-        ship.orientation = "Horizontal";
-      }
+      p1Fleet[p1ShipsPlaced].rotateShip();
+      // let ship = p1Fleet[p1ShipsPlaced];
+      // if (ship.orientation === "Horizontal") {
+      //   ship.orientation = "Vertical";
+      // } else if (ship.orientation === "Vertical") {
+      //   ship.orientation = "Horizontal";
+      // }
     }
   };
 
   // Find a safe grid on player 2 board to place ship, trigger placeP2Ship
   const checkP2Ship = (shipNo) => {
-    // Get Ship and update Orientation randomly
-    // let ship = p2Fleet[shipNo];
-    // let randomNo = Math.random();
-    // if (randomNo < 0.5) {
-    //   ship.orientation = "Vertical";
-    //   setP2Fleet([...p2Fleet, (p2Fleet[shipNo] = ship)]);
-    // }
-
     // Get random grid and check for overflow/overlap
     let gridNo = random100();
     if (
@@ -242,6 +235,15 @@ function Battleship() {
         // Find ship in p2Fleet && Update grid
         p2Fleet.forEach((ship) => {
           if (ship.gridArr.indexOf(tgtGrid) > -1) {
+            
+            ship.receiveHit(tgtGrid)
+            console.log(ship)
+
+            ship.updateStatus()
+            console.log(p2Fleet)
+
+            /*
+            
             let shipIndex = p2Fleet.indexOf(ship);
             let gridIndex = ship.gridArr.indexOf(tgtGrid);
             let tgtShip = ship;
@@ -257,16 +259,13 @@ function Battleship() {
 
             tempFleet[shipIndex] = tgtShip;
             setP2Fleet(tempFleet);
+
+            */
+
           }
         });
-        // Apply hit to ship once found
-        // Apply isHit:true && isShot:true to square on board
       } else {
-        // No Ship Present - Process Miss
-        // Apply isMiss:true && isShot:true to square on board
       }
-      // Initiate player2's turn
-      // Increment turn tracker && counter
     }
   };
 
