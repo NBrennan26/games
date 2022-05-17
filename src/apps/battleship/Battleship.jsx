@@ -6,6 +6,7 @@ import checkOverflow from "./features/scripts/checkOverflow";
 import checkCollision from "./features/scripts/checkCollision";
 import random100 from "./features/scripts/random100";
 import assignOrientation from "./features/scripts/assignOrientation";
+import checkSunk from "./features/scripts/checkSunk";
 import "./bs.css";
 
 function Battleship() {
@@ -233,9 +234,39 @@ function Battleship() {
 
   const handlePlayerAttack = (e) => {
     if (p1ShipsPlaced === 5) {
-      // check if ship is present (p2Board[grid])
-      // if ship is present, apply hit to ship (p2fleet)
-      // Loop through ships in fleet, if tgtGrid is in
+      let tgtGrid = p2Board[e.target.classList[1]].index;
+      console.log(p2Board);
+      // Check if ship is present at target grid
+      if (p2Board[tgtGrid].hasShip) {
+        // Ship Present - Process Hit
+        // Find ship in p2Fleet && Update grid
+        p2Fleet.forEach((ship) => {
+          if (ship.gridArr.indexOf(tgtGrid) > -1) {
+            let shipIndex = p2Fleet.indexOf(ship);
+            let gridIndex = ship.gridArr.indexOf(tgtGrid);
+            let tgtShip = ship;
+            let tempFleet = p2Fleet;
+            tgtShip.grids[gridIndex].hit = true;
+
+            // Check if ship is sunk and update if so
+            if (checkSunk(tgtShip.length, tgtShip.grids)) {
+              tgtShip.isSunk = true;
+              tgtShip.status = "Sunk";
+              console.log("sunk", tgtShip);
+            }
+
+            tempFleet[shipIndex] = tgtShip;
+            setP2Fleet(tempFleet);
+          }
+        });
+        // Apply hit to ship once found
+        // Apply isHit:true && isShot:true to square on board
+      } else {
+        // No Ship Present - Process Miss
+        // Apply isMiss:true && isShot:true to square on board
+      }
+      // Initiate player2's turn
+      // Increment turn tracker && counter
     }
   };
 
