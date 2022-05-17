@@ -71,7 +71,7 @@ const buildShip = function (name, length, player, orientation) {
 
     // Update Status
     updateStatus() {
-      if (this.player === "player1") {
+      if (this.player === 1) {
         if (this.isSunk) {
           this.status = "Sunk";
         } else {

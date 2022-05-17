@@ -19,6 +19,8 @@ function Battleship() {
   const [counter, setCounter] = useState({ player1: 0, player2: 0 });
   const [p1ShipsPlaced, setP1ShipsPlaced] = useState(0);
   const [player1Turn, setPlayer1Turn] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
+  const [gameWinner, setGameWinner] = useState(null);
 
   // Create ships and add them to player fleets
   useEffect(() => {
@@ -42,6 +44,16 @@ function Battleship() {
     setP1Fleet(p1Ships);
     setP2Fleet(p2Ships);
   }, []);
+
+  useEffect(() => {
+    if (p1Fleet.length === 5) {
+      p1Fleet[0].updateStatus();
+      p1Fleet[1].updateStatus();
+      p1Fleet[2].updateStatus();
+      p1Fleet[3].updateStatus();
+      p1Fleet[4].updateStatus();
+    }
+  }, [p1Fleet]);
 
   useEffect(() => {
     if (p2Fleet.length === 5) {
@@ -270,6 +282,29 @@ function Battleship() {
       player2: counter.player2,
     });
   };
+
+  // Check End Game (All fleet ships sunk)
+  useEffect(() => {
+    let p1Sunk = 0;
+    let p2Sunk = 0;
+    p1Fleet.forEach((ship) => {
+      if (ship.isSunk) {
+        p1Sunk += 1;
+      }
+    });
+    p2Fleet.forEach((ship) => {
+      if (ship.isSunk) {
+        p2Sunk += 1;
+      }
+    });
+    if (p1Sunk === 5) {
+      setGameWinner("player1");
+      setGameOver(true);
+    } else if (p2Sunk === 5) {
+      setGameWinner("player2");
+      setGameOver(true);
+    }
+  }, [p1Fleet, p2Fleet, counter]);
 
   const handleAiAttack = () => {
     let tgtGrid = random100();
