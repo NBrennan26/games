@@ -19,6 +19,7 @@ function Battleship() {
   const [counter, setCounter] = useState({ player1: 0, player2: 0 });
   const [p1ShipsPlaced, setP1ShipsPlaced] = useState(0);
   const [player1Turn, setPlayer1Turn] = useState(false);
+  const [p2ShotSquares, setP2ShotSquares] = useState([]);
   const [gameOver, setGameOver] = useState(false);
   const [gameWinner, setGameWinner] = useState(null);
 
@@ -47,6 +48,7 @@ function Battleship() {
 
   useEffect(() => {
     if (p1Fleet.length === 5) {
+      setPlayer1Turn(true);
       p1Fleet[0].updateStatus();
       p1Fleet[1].updateStatus();
       p1Fleet[2].updateStatus();
@@ -242,7 +244,7 @@ function Battleship() {
   };
 
   const handlePlayerAttack = (e) => {
-    if (p1ShipsPlaced === 5) {
+    if (p1ShipsPlaced === 5 && player1Turn && !gameOver) {
       let tgtGrid = p2Board[e.target.classList[1]].index;
       let fleet = p2Fleet;
       let board = p2Board;
@@ -276,11 +278,58 @@ function Battleship() {
         board[tgtGrid].isMiss = true;
         setP2Board(board);
       }
+      setCounter({
+        player1: counter.player1 + 1,
+        player2: counter.player2,
+      });
+      setPlayer1Turn(false);
+      handleAiAttack();
     }
-    setCounter({
-      player1: counter.player1 + 1,
-      player2: counter.player2,
-    });
+  };
+
+  const handleAiAttack = () => {
+    let tgtGrid = random100();
+    let fleet = p1Fleet;
+    let board = p1Board;
+    let shotArr = p2ShotSquares;
+
+    if (shotArr.indexOf(tgtGrid) === -1) {
+      if (p1Board[tgtGrid].hasShip) {
+        // Ship Present - Process Hit
+        fleet.forEach((ship) => {
+          if (ship.gridArr.indexOf(tgtGrid) > -1) {
+            ship.receiveHit(tgtGrid);
+            console.log(ship);
+
+            ship.updateStatus();
+            console.log(fleet);
+          }
+        });
+        // Update p2Fleet state
+        setP1Fleet(fleet);
+        console.log(p1Fleet);
+        // console.log(p1Fleet)
+
+        // Update board with Hit
+        board[tgtGrid].isShot = true;
+        board[tgtGrid].isHit = true;
+        setP1Board(board);
+      } else {
+        // Update board with Miss
+        board[tgtGrid].isShot = true;
+        board[tgtGrid].isMiss = true;
+        setP1Board(board);
+      }
+      shotArr.push(tgtGrid);
+      setP2ShotSquares(shotArr);
+      setCounter({
+        player1: counter.player1,
+        player2: counter.player2 + 1,
+      });
+      setPlayer1Turn(true);
+    } else {
+      handleAiAttack();
+    }
   };
 
   // Check End Game (All fleet ships sunk)
@@ -306,38 +355,38 @@ function Battleship() {
     }
   }, [p1Fleet, p2Fleet, counter]);
 
-  const handleAiAttack = () => {
-    let tgtGrid = random100();
-  };
-
   return (
     <div className="battleship-cont">
       <div className="bs-title-cont">
         <span className="bs-title">Battleship</span>
       </div>
-      <div className="bs-board-cont">
-        <GameBoard
-          p1Board={p1Board}
-          setP1Board={setP1Board}
-          p2Board={p2Board}
-          setP2Board={setP2Board}
-          p1ShipsPlaced={p1ShipsPlaced}
-          handlePlaceShip={handlePlaceShip}
-          handleHoverIn={handleHoverIn}
-          handleHoverOut={handleHoverOut}
-          handleRotate={handleRotate}
-          handlePlayerAttack={handlePlayerAttack}
-          counter={counter}
-        />
-        <GameData
-          p1Fleet={p1Fleet}
-          p2Fleet={p2Fleet}
-          p1Board={p1Board}
-          p2Board={p2Board}
-          counter={counter}
-          p1ShipsPlaced={p1ShipsPlaced}
-        />
-      </div>
+      {!gameWinner ? (
+        <div className="bs-board-cont">
+          <GameBoard
+            p1Board={p1Board}
+            setP1Board={setP1Board}
+            p2Board={p2Board}
+            setP2Board={setP2Board}
+            p1ShipsPlaced={p1ShipsPlaced}
+            handlePlaceShip={handlePlaceShip}
+            handleHoverIn={handleHoverIn}
+            handleHoverOut={handleHoverOut}
+            handleRotate={handleRotate}
+            handlePlayerAttack={handlePlayerAttack}
+            counter={counter}
+          />
+          <GameData
+            p1Fleet={p1Fleet}
+            p2Fleet={p2Fleet}
+            p1Board={p1Board}
+            p2Board={p2Board}
+            counter={counter}
+            p1ShipsPlaced={p1ShipsPlaced}
+          />
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }
