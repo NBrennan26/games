@@ -5,6 +5,7 @@ import buildShip from "./features/scripts/buildship";
 import checkOverflow from "./features/scripts/checkOverflow";
 import checkCollision from "./features/scripts/checkCollision";
 import random100 from "./features/scripts/random100";
+import assignOrientation from "./features/scripts/assignOrientation";
 import "./bs.css";
 
 function Battleship() {
@@ -16,20 +17,20 @@ function Battleship() {
   const [p2Board, setP2Board] = useState([]);
   const [counter, setCounter] = useState({ player1: 0, player2: 0 });
   const [p1ShipsPlaced, setP1ShipsPlaced] = useState(0);
-  const [player1Turn, setPlayer1Turn] = useState(false)
+  const [player1Turn, setPlayer1Turn] = useState(false);
 
   // Create ships and add them to player fleets
   useEffect(() => {
-    const p1Carrier = buildShip("Carrier", 5, 1);
-    const p1Battle = buildShip("Battleship", 4, 1);
-    const p1Sub = buildShip("Submarine", 3, 1);
-    const p1Cruise = buildShip("Cruiser", 3, 1);
-    const p1Dest = buildShip("Destroyer", 2, 1);
-    const p2Carrier = buildShip("Carrier", 5, 2);
-    const p2Battle = buildShip("Battleship", 4, 2);
-    const p2Sub = buildShip("Submarine", 3, 2);
-    const p2Cruise = buildShip("Cruiser", 3, 2);
-    const p2Dest = buildShip("Destroyer", 2, 2);
+    const p1Carrier = buildShip("Carrier", 5, 1, assignOrientation(1));
+    const p1Battle = buildShip("Battleship", 4, 1, assignOrientation(1));
+    const p1Sub = buildShip("Submarine", 3, 1, assignOrientation(1));
+    const p1Cruise = buildShip("Cruiser", 3, 1, assignOrientation(1));
+    const p1Dest = buildShip("Destroyer", 2, 1, assignOrientation(1));
+    const p2Carrier = buildShip("Carrier", 5, 2, assignOrientation(2));
+    const p2Battle = buildShip("Battleship", 4, 2, assignOrientation(2));
+    const p2Sub = buildShip("Submarine", 3, 2, assignOrientation(2));
+    const p2Cruise = buildShip("Cruiser", 3, 2, assignOrientation(2));
+    const p2Dest = buildShip("Destroyer", 2, 2, assignOrientation(2));
 
     let p1Ships = [];
     let p2Ships = [];
@@ -89,6 +90,7 @@ function Battleship() {
         }
       }
     }
+    console.log(p2Fleet);
   };
 
   // Show placement preview on hover ovre player 1 board
@@ -172,12 +174,12 @@ function Battleship() {
   // Find a safe grid on player 2 board to place ship, trigger placeP2Ship
   const checkP2Ship = (shipNo) => {
     // Get Ship and update Orientation randomly
-    let ship = p2Fleet[shipNo];
-    let randomNo = Math.random();
-    if (randomNo < 0.5) {
-      ship.orientation = "Vertical";
-      setP2Fleet([...p2Fleet, (p2Fleet[shipNo] = ship)]);
-    }
+    // let ship = p2Fleet[shipNo];
+    // let randomNo = Math.random();
+    // if (randomNo < 0.5) {
+    //   ship.orientation = "Vertical";
+    //   setP2Fleet([...p2Fleet, (p2Fleet[shipNo] = ship)]);
+    // }
 
     // Get random grid and check for overflow/overlap
     let gridNo = random100();
@@ -231,13 +233,15 @@ function Battleship() {
 
   const handlePlayerAttack = (e) => {
     if (p1ShipsPlaced === 5) {
-      console.log(e.target)
+      // check if ship is present (p2Board[grid])
+      // if ship is present, apply hit to ship (p2fleet)
+      // Loop through ships in fleet, if tgtGrid is in
     }
-  }
+  };
 
   const handleAiAttack = () => {
-    let tgtGrid = random100()
-  }
+    let tgtGrid = random100();
+  };
 
   return (
     <div className="battleship-cont">

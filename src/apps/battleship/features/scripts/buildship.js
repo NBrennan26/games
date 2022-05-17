@@ -1,11 +1,11 @@
-const buildShip = function (name, length, player) {
+const buildShip = function (name, length, player, orientation) {
   return {
     name: name,
     length: length,
     player: player,
     grids: [],
     isSunk: false,
-    orientation: "Horizontal",
+    orientation: orientation,
     status: "Okay",
 
     // grid {coord: Num, hit: false}
