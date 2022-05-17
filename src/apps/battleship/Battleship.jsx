@@ -43,6 +43,16 @@ function Battleship() {
     setP2Fleet(p2Ships);
   }, []);
 
+  useEffect(() => {
+    if (p2Fleet.length === 5) {
+      p2Fleet[0].updateStatus();
+      p2Fleet[1].updateStatus();
+      p2Fleet[2].updateStatus();
+      p2Fleet[3].updateStatus();
+      p2Fleet[4].updateStatus();
+    }
+  }, [p2Fleet]);
+
   // Place player 1 ships from click
   const handlePlaceShip = (e) => {
     // Check which board was clicked
@@ -222,41 +232,37 @@ function Battleship() {
   const handlePlayerAttack = (e) => {
     if (p1ShipsPlaced === 5) {
       let tgtGrid = p2Board[e.target.classList[1]].index;
-      let fleet = p2Fleet
-      let board = p2Board
-      let grid = board[tgtGrid]
+      let fleet = p2Fleet;
+      let board = p2Board;
+      let grid = board[tgtGrid];
       console.log(board);
-      console.log(grid)
+      console.log(grid);
       // Check if ship is present at target grid
       if (p2Board[tgtGrid].hasShip) {
         // Ship Present - Process Hit
         fleet.forEach((ship) => {
           if (ship.gridArr.indexOf(tgtGrid) > -1) {
-            
-            ship.receiveHit(tgtGrid)
-            console.log(ship)
+            ship.receiveHit(tgtGrid);
+            console.log(ship);
 
-            ship.updateStatus()
-            console.log(fleet)
-
-
-            
+            ship.updateStatus();
+            console.log(fleet);
           }
         });
         // Update p2Fleet state
-        setP2Fleet(fleet)
-        console.log(p2Fleet)
+        setP2Fleet(fleet);
+        console.log(p2Fleet);
         // console.log(p1Fleet)
 
         // Update board with Hit
-        board[tgtGrid].isShot = true
-        board[tgtGrid].isHit = true
-        setP2Board(board)
+        board[tgtGrid].isShot = true;
+        board[tgtGrid].isHit = true;
+        setP2Board(board);
       } else {
         // Update board with Miss
-        board[tgtGrid].isShot = true
-        board[tgtGrid].isMiss = true
-        setP2Board(board)
+        board[tgtGrid].isShot = true;
+        board[tgtGrid].isMiss = true;
+        setP2Board(board);
       }
     }
     setCounter({
