@@ -57,10 +57,14 @@
 .etch-sketch-btn {
   margin: 10px;
   background-color: #d51d25;
-  color: white;
+  color: #d1a144;
+  font-weight: 600;
   padding: 10px;
+  border: 2px solid #d1a144;
   border-radius: 5px;
   transition: transform 0.1s;
+  position: absolute;
+  top: 90vh;
 }
 .etch-sketch-btn:hover {
   transform: scale(1.3);

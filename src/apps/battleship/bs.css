@@ -8,7 +8,7 @@
   flex-direction: column;
   align-items: center;
   font-family: "Righteous", cursive;
-  background-color: #3968b5;
+  background-color: var(--body-color);
   height: 93vh;
 }
 .bs-title-cont {
@@ -33,12 +33,25 @@
   margin-top: 12px;
   border: 2px solid black;
   border-radius: 10px;
-  padding: 2px;
+  padding: 5px;
   font-family: "Righteous", cursive;
   transition: 0.1s;
 }
 .bs-btn:hover {
   transform: scale(1.1);
+}
+
+/*********/
+/* Title */
+/*********/
+.bs-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80vw;
+}
+.bs-title-icon {
+  height: 10vh;
 }
 
 /*****************/
@@ -56,6 +69,7 @@
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
   margin: 0 10px;
+  background-color: #5c5c94;
 }
 .player2-board:hover {
   cursor: crosshair;
@@ -67,16 +81,16 @@
   border: 1px solid black;
 }
 .ship {
-  background-color: green;
+  background-color: #2c2c2c;
 }
 .shadow {
-  background-color: purple;
+  background-color: #27274e;
 }
 .miss {
-  background-color: brown;
+  background-color: #bdbedb;
 }
 .hit {
-  background-color: yellow;
+  background-color: #d00000;
 }
 .bs-rotate-btn {
 }
@@ -89,7 +103,8 @@
   display: flex;
   justify-content: space-around;
 }
-.p1-ship-status, .p2-ship-status {
+.p1-ship-status,
+.p2-ship-status {
   display: flex;
   flex-direction: column;
   align-items: center;

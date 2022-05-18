@@ -42,10 +42,12 @@
   border-style: solid;
 }
 .player1-square {
-  background: red;
+  background: var(--accent-color);
+  color: var(--header-color);
 }
 .player2-square {
-  background: blue;
+  background: var(--detail-color);
+  color: var(--header-color);
 }
 .ttt-game-board {
   display: flex;
@@ -59,4 +61,14 @@
   justify-content: center;
   align-items: center;
   font-size: 250%;
+}
+.ttt-reset-btn {
+  color: var(--font-color);
+  background-color: var(--header-color);
+  border-radius: 10px;
+  padding: 10px;
+  transition: 0.2s;
+}
+.ttt-reset-btn:hover {
+  transform: scale(1.2);
 }

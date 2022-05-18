@@ -11,7 +11,7 @@ const PopUp = (props) => {
             <br />
             <input type="text" placeholder="AAA" maxLength="3"></input>
           </label>
-          <button onClick={props.handleSubmitUser} type="button">
+          <button className="ps-popup-btn" onClick={props.handleSubmitUser} type="button">
             Submit
           </button>
         </form>

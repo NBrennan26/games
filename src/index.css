@@ -1,7 +1,22 @@
 :root {
-  --header-color: #8f96a3;
+  --header-color: #1d3557;
+  --body-color: #457b9d;
+  --font-color: #f1faee;
+  --detail-color: #a8dadc;
+  --accent-color: #e63946;
 }
 
+html {
+  background-color: var(--body-color);
+}
+*,
+a {
+  color: var(--font-color);
+}
+button {
+  color: var(--font-color);
+  background-color: var(--header-color);
+}
 button:hover {
   cursor: pointer;
 }

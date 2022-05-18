@@ -35,11 +35,11 @@ const Leaderboard = (props) => {
   const setBtnStyle = (val) => {
     if (val === curBoard) {
       return {
-        background: "#82c0cc",
+        background: "#f1faee",
       };
     } else {
       return {
-        background: "#16697a",
+        background: "#e63946",
       };
     }
   };

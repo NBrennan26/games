@@ -8,6 +8,7 @@ import checkCollision from "./features/scripts/checkCollision";
 import random100 from "./features/scripts/random100";
 import assignOrientation from "./features/scripts/assignOrientation";
 import "./bs.css";
+import icon from "./features/images/bs-icon.png";
 
 function Battleship() {
   const [p1Fleet, setP1Fleet] = useState([]);
@@ -390,7 +391,7 @@ function Battleship() {
   return (
     <div className="battleship-cont">
       <div className="bs-title-cont">
-        <span className="bs-title">Battleship</span>
+        <span className="bs-title"><img className="bs-title-icon" src={icon} alt="Battleship Icon" />Battleship</span>
       </div>
       {!gameWinner ? (
         <div className="bs-board-cont">
