@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&family=Ubuntu:wght@300;400;500&display=swap");
+
 :root {
   --header-color: #1d3557;
   --body-color: #457b9d;
@@ -36,6 +38,7 @@ header {
 }
 .header-title-cont {
   margin-right: 20px;
+  font-family: "Source Sans Pro", sans-serif;
 }
 .drop-menu {
   position: absolute;
@@ -46,6 +49,7 @@ header {
   max-width: 240px;
   height: calc(100vh - 70px);
   z-index: 2;
+  font-family: "Source Sans Pro", sans-serif;
 }
 .nav-list {
   display: flex;
@@ -73,4 +77,35 @@ footer {
 }
 .github-icon:hover {
   transform: scale(1.5);
+}
+
+/*************/
+/* Home Page */
+/*************/
+.home-cont {
+  display: flex;
+  flex-direction: column;
+  font-family: "Ubuntu", sans-serif;
+}
+.home-title-cont {
+  margin: auto;
+  margin-top: 2vh;
+  font-weight: 500;
+}
+.home-main-cont {
+  margin: auto;
+  margin-top: 2vh;
+  width: 80vw;
+}
+.game-desc-cont {
+  margin: 1vh;
+}
+.home-game-title {
+  margin: auto;
+  text-decoration: underline;
+  font-weight: 400;
+}
+.home-game-desc {
+  margin-top: 2px;
+  font-weight: 300;
 }
