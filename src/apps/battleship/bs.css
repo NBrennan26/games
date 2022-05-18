@@ -92,10 +92,7 @@
 .hit {
   background-color: #d00000;
 }
-.bs-rotate-btn {
-}
-.bs-rotate-btn:hover {
-}
+
 /*************/
 /* Game Data */
 /*************/
@@ -115,6 +112,7 @@
 .bs-sunk-span {
   color: red;
 }
+
 /*************/
 /* Game Over */
 /*************/
@@ -127,8 +125,4 @@
 .bs-game-over-mess {
   font-size: 175%;
   margin-bottom: 5vh;
-}
-.bs-reset-btn {
-}
-.bs-reset-btn.hover {
 }

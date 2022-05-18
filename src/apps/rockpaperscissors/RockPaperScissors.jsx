@@ -16,6 +16,10 @@ function RockPaperScissors() {
   const [aiMessage, setAiMessage] = useState("");
   const [gameMessage, setGameMessage] = useState("");
 
+  useEffect(() => {
+    document.title = "Games | Rock Paper Scissors";
+  }, []);
+
   const selectRock = () => {
     setPlayerSelect("rock");
     setPlayerRounds(playerRounds + 1);

@@ -1,11 +1,15 @@
+import { useEffect } from "react";
 import SketchPad from "./SketchPad";
 import "./eas.css";
 
 function EtchaSketch() {
+  useEffect(() => {
+    document.title = "Games | Etch-a-Sketch";
+  }, []);
 
   const handleReset = () => {
-    window.location.reload(false)
-  }
+    window.location.reload(false);
+  };
 
   return (
     <div className="etch-a-sketch-cont">
@@ -16,7 +20,9 @@ function EtchaSketch() {
         <div className="dial right-dial"></div>
       </div>
       <div className="etch-sketch-controls">
-        <button className="etch-sketch-btn" onClick={handleReset}>Shake</button>
+        <button className="etch-sketch-btn" onClick={handleReset}>
+          Shake
+        </button>
       </div>
     </div>
   );

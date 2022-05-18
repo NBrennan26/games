@@ -1,7 +1,12 @@
+import { useEffect } from "react";
 import "./mc.css";
 import GameContainer from "./components/GameContainer";
 
 function MemoryCard() {
+  useEffect(() => {
+    document.title = "Games | Memory Card";
+  }, []);
+
   return (
     <div>
       <GameContainer />
@@ -10,4 +15,3 @@ function MemoryCard() {
 }
 
 export default MemoryCard;
-

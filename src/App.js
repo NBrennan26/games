@@ -16,7 +16,7 @@ function App() {
         <div>
           <Header />
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<Dashboard title="Home" />} />
             <Route path="/battleship" element={<Battleship />} />
             <Route path="/etchasketch" element={<EtchaSketch />} />
             <Route path="/memory-card" element={<MemoryCard />} />

@@ -22,6 +22,10 @@ function Battleship() {
   const [gameOver, setGameOver] = useState(false);
   const [gameWinner, setGameWinner] = useState(null);
 
+  useEffect(() => {
+    document.title = "Games | Battleship";
+  }, []);
+
   // Create ships and add them to player fleets
   useEffect(() => {
     const p1Carrier = buildShip("Carrier", 5, 1, assignOrientation(1));
@@ -391,7 +395,10 @@ function Battleship() {
   return (
     <div className="battleship-cont">
       <div className="bs-title-cont">
-        <span className="bs-title"><img className="bs-title-icon" src={icon} alt="Battleship Icon" />Battleship</span>
+        <span className="bs-title">
+          <img className="bs-title-icon" src={icon} alt="Battleship Icon" />
+          Battleship
+        </span>
       </div>
       {!gameWinner ? (
         <div className="bs-board-cont">

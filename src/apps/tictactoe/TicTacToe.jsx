@@ -29,6 +29,10 @@ function TicTacToe() {
   const [gameOutcome, setGameOutcome] = useState({});
   const [gameOver, setGameOver] = useState(false);
 
+  useEffect(() => {
+    document.title = "Games | Tic-Tac-Toe";
+  }, []);
+
   // Click to claim a square
   const claimSquare = (e) => {
     let tgtSquare = parseInt(e.target.classList[1].slice(7));
@@ -227,7 +231,9 @@ function TicTacToe() {
           <div className="ttt-game-outcome">
             {gameOutcome.name ? `${gameOutcome.name} Wins` : "It's a Draw"}
           </div>
-          <button className="ttt-reset-btn" onClick={resetGame}>Play Again?</button>
+          <button className="ttt-reset-btn" onClick={resetGame}>
+            Play Again?
+          </button>
         </div>
       )}
     </div>
